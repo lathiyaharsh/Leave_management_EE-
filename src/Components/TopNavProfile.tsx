@@ -3,107 +3,76 @@ import Image from "next/image";
 import { useState } from "react";
 import A from "./ui/a";
 
-const student: { title: string; href: string }[] = [
-  {
-    title: "Student",
-    href: "/docs/primitives/alert-dialog",
-  },
-];
-const hod: { title: string; href: string }[] = [
-  {
-    title: "Hod",
-    href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-  },
-];
-const faculty: { title: string; href: string }[] = [
-  {
-    title: "Faculty",
-    href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-  },
-];
-const admin: { title: string; href: string }[] = [
-  {
-    title: "Admin",
-    href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-  },
-];
-const guest: { title: string; href: string }[] = [
-  {
-    title: "Sign in",
-    href: "/login",
-  },
-  {
-    title: "Sign Up",
-    href: "/signUp",
-  },
-];
-const commune: { title: string; href: string }[] = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-  },
-  {
-    title: "Logout",
-    href: "/logout",
-  },
-];
-const communeForAll: { title: string; href: string }[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "About",
-    href: "/about",
-  },
-  {
-    title: "Blog",
-    href: "/blog    ",
-  },
-];
+
 
 function TopNavProfile({ user }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 
   const userRole = user?.user?.user || "Guest";
+  const userName = user?.user?.name;
+  const student: { title: string; href: string }[] = [
+    {
+      title: "Student",
+      href: "#",
+    },
+  ];
+  const hod: { title: string; href: string }[] = [
+    {
+      title: "Hod",
+      href: "/docs/primitives/alert-dialog",
+    }
+  ];
+  const faculty: { title: string; href: string }[] = [
+    {
+      title: "Faculty",
+      href: "/docs/primitives/alert-dialog",
+    }
+  ];
+  const admin: { title: string; href: string }[] = [
+    {
+      title: "Admin",
+      href: "/docs/primitives/alert-dialog",
+    }
+  ];
+  const guest: { title: string; href: string }[] = [
+    {
+      title: "Sign in",
+      href: "/login",
+    },
+    {
+      title: "Sign Up",
+      href: "/signUp",
+    },
+  ];
+  const commune: { title: string; href: string }[] = [
+    {
+      title: userName || "Profile",
+      href: "/profile",
+    },
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      title: "Logout",
+      href: "/logout",
+    },
+  ];
+  const communeForAll: { title: string; href: string }[] = [
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "About",
+      href: "/about",
+    },
+    {
+      title: "Blog",
+      href: "/blog    ",
+    },
+  ];
   const communeComponents = commune;
   const components =
     userRole === "Guest"

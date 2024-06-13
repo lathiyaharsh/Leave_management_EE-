@@ -17,30 +17,31 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import fetchUser from "@/Utils/getUserDetails";
 import NavBar from "@/Components/Navbar";
+import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const UserFetcher = () => {
   try {
     const [, setUser] = useUserContext();
 
-  const getApi = async () => {
-    try {
-      const result = await fetchUser();
-      setUser(result);
-    } catch (error) {
-      console.error("Error fetching user Role:", error);
-    } 
-  };
+    const getApi = async () => {
+      try {
+        const result = await fetchUser();
+        setUser(result);
+      } catch (error) {
+        console.error("Error fetching user Role:", error);
+      }
+    };
 
-  useEffect(() => {
-    getApi();
-  }, []);
+    useEffect(() => {
+      getApi();
+    }, []);
 
-  return null;
+    return null;
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export default function RootLayout({
   children,
@@ -49,19 +50,21 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <RoleContextProvider>
-        <UserContextProvider>
-          <UserFetcher />
-          <html lang="en">
-            <body className={inter.className}>
-              <NavBar />
-              <div className="top-nav-spacer"></div>
-              <>{children}</>
-              <ToastContainer />
-            </body>
-          </html>
-        </UserContextProvider>
-      </RoleContextProvider>
+      <StoreProvider>
+        <RoleContextProvider>
+          <UserContextProvider>
+            <UserFetcher />
+            <html lang="en">
+              <body className={inter.className}>
+                <NavBar />
+                <div className="top-nav-spacer"></div>
+                <>{children}</>
+                <ToastContainer />
+              </body>
+            </html>
+          </UserContextProvider>
+        </RoleContextProvider>
+      </StoreProvider>
     </>
   );
 }

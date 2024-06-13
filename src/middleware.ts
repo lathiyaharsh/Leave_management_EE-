@@ -3,12 +3,12 @@ import * as jose from "jose";
 
 // Define the protected non-API routes
 const protectedRoutes: Record<string, string[]> = {
-  student: ["/logout"],
+  student: ["/user/leave"],
   hod: [ "/lms/hod"],
   faculty: ["/lms/faculty"],
   admin: ["/admin", "/lms/admin"],
 };
-const commonRoutes = ["/dashboard", "/profile"]; //protected
+const commonRoutes = ["/dashboard", "/profile","/logout","/user/leave"]; //protected
 const authRoutes = ["/login", "/register"];
 const publicRoutes = ["/blog", "/about", "/lmsAuth"];
 

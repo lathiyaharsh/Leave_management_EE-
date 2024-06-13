@@ -1,55 +1,65 @@
 import Link from "next/link";
 import React from "react";
 
-const student: { title: string; href: string }[] = [
-  {
-    title: "Student",
-    href: "#",
-  },
-];
-const hod: { title: string; href: string }[] = [
-  {
-    title: "Hod",
-    href: "#",
-  },
-];
-const faculty: { title: string; href: string }[] = [
-  {
-    title: "Faculty",
-    href: "#",
-  },
-];
-const admin: { title: string; href: string }[] = [
-  {
-    title: "Admin",
-    href: "#",
-  },
-];
-const loginCommune: { title: string; href: string }[] = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-  },
-  {
-    title: "Logout",
-    href: "/logout",
-  },
-];
-
-const guest: { title: string; href: string }[] = [
-  {
-    title: "Sign In",
-    href: "/Login",
-  },
-  {
-    title: "Sign Up",
-    href: "/signUp",
-  },
-];
-
 function SideBarLi({ user }) {
   const userRole = user?.user?.user || "Guest";
-  
+  const userName = user?.user?.name;
+
+  const student: { title: string; href: string }[] = [
+    {
+      title: "Student",
+      href: "#",
+    },
+  ];
+  const hod: { title: string; href: string }[] = [
+    {
+      title: "Hod",
+      href: "#",
+    },
+  ];
+  const faculty: { title: string; href: string }[] = [
+    {
+      title: "Faculty",
+      href: "#",
+    },
+  ];
+  const admin: { title: string; href: string }[] = [
+    {
+      title: "Admin",
+      href: "#",
+    },
+  ];
+  const loginCommune: { title: string; href: string }[] = [
+    {
+      title: userName || "Profile",
+      href: "/profile",
+    },
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      title: "Leave",
+      href: "/user/leave",
+    },
+
+    {
+      title: "Logout",
+      href: "/logout",
+    },
+  ];
+
+  const guest: { title: string; href: string }[] = [
+    {
+      title: "Sign In",
+      href: "/Login",
+    },
+    {
+      title: "Sign Up",
+      href: "/signUp",
+    },
+  ];
+
   const components =
     userRole === "Guest"
       ? guest
@@ -64,7 +74,6 @@ function SideBarLi({ user }) {
               : null;
   return (
     <>
-     
       {userRole !== "Guest" ? (
         <>
           {components?.map((component, i) => (

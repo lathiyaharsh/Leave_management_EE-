@@ -6,35 +6,11 @@ const student: { title: string; href: string }[] = [
     title: "Student",
     href: "/docs/primitives/alert-dialog",
   },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-  },
 ];
 const hod: { title: string; href: string }[] = [
   {
     title: "Hod",
     href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
   },
 ];
 const faculty: { title: string; href: string }[] = [
@@ -42,35 +18,11 @@ const faculty: { title: string; href: string }[] = [
     title: "Faculty",
     href: "/docs/primitives/alert-dialog",
   },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-  },
 ];
 const admin: { title: string; href: string }[] = [
   {
     title: "Admin",
     href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
   },
 ];
 

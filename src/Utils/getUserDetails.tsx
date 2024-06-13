@@ -1,9 +1,6 @@
-"use client";
 import axios from "axios";
-import Cookies from "js-cookie";
-import getToken from "./getToken";
 
-const baseUrl  = process.env.NEXT_PUBLIC_BASEURL;
+const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 const fetchUser = async () => {
   try {
@@ -16,7 +13,7 @@ const fetchUser = async () => {
     if (userProfile?.data?.profile) {
       return userProfile?.data?.profile;
     } else {
-      return false;
+      return "guest";
     }
   } catch (error) {
     console.log(error);
