@@ -8,6 +8,7 @@ import { postApiCallWithImage } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
+import { signUp } from "@/Components/ui/form/fields";
 const SignUp = () => {
   const router = useRouter();
   const [signUpLoading,setSignUpLoading] = useState(false);
@@ -37,31 +38,7 @@ const SignUp = () => {
   const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
     formik;
 
-  const fields = [
-    { id: "name", name: "name", title: "Name", type: "text" },
-    { id: "email", name: "email", title: "Email", type: "email" },
-    { id: "phone", name: "phone", title: "Phone Number", type: "number" },
-    { id: "address", name: "address", title: "Address", type: "textarea" },
-    {
-      id: "gender",
-      name: "gender",
-      title: "Gender",
-      type: "radio",
-      options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
-        { label: "Other", value: "other" },
-      ],
-    },
-    { id: "image", name: "image", title: "User Image", type: "file" },
-    { id: "password", name: "password", title: "Password", type: "password" },
-    {
-      id: "confirmPassword",
-      name: "confirmPassword",
-      title: "Confirm Password",
-      type: "password",
-    },
-  ];
+  const fields = signUp;
   return (
     <div className="p-8  bg-gray-100 min-h-screen flex items-center justify-center ">
       <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">

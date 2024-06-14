@@ -1,8 +1,10 @@
 import axios from "axios";
 
+
 const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 const fetchUser = async () => {
+  
   try {
     let url = "/user/profile";
 
@@ -17,6 +19,7 @@ const fetchUser = async () => {
     }
   } catch (error) {
     console.log(error);
+    throw error;
     return false;
   }
 };

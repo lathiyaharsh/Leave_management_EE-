@@ -22,6 +22,15 @@ function useInitialValues(type: string) {
       address: "",
     };
   }
+  if (type === "apply_leave") {
+    initialValues = {
+      reason: "",
+      leaveType: "",
+      startDate: "",
+      endDate: "",
+      requestToId: "",
+    };
+  }
 
   return initialValues;
 }

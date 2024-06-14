@@ -19,16 +19,17 @@ import fetchUser from "@/Utils/getUserDetails";
 import NavBar from "@/Components/Navbar";
 import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
-
+import { useRouter } from "next/navigation";
 export const UserFetcher = () => {
   try {
     const [, setUser] = useUserContext();
-
+    const router = useRouter();
     const getApi = async () => {
       try {
         const result = await fetchUser();
         setUser(result);
       } catch (error) {
+        router.push("/logout");
         console.error("Error fetching user Role:", error);
       }
     };

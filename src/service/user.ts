@@ -1,5 +1,4 @@
-import fetchUser from "@/Utils/getUserDetails";
-import { useUserContext } from "@/app/context/userContext";
+
 import axios from "axios";
 
 export const UserFetcher = async () => {

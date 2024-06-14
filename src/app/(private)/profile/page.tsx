@@ -10,6 +10,7 @@ import FieldGroup from "@/Components/ui/form/useInputGroup";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import { putApiCall } from "@/Utils/apiCall";
+import { updateProfile } from "@/Components/ui/form/fields";
 
 function Profile() {
   const [loading, setLoading] = useState(false);
@@ -18,24 +19,7 @@ function Profile() {
   const [user,setUser] = useUserContext();
   const { name, email, gender, image, phone, department, address, div } = user;
 
-  const fields = [
-    { id: "name", name: "name", title: "Name", type: "text" },
-    { id: "email", name: "email", title: "Email", type: "email" },
-    { id: "phone", name: "phone", title: "Phone Number", type: "number" },
-    { id: "address", name: "address", title: "Address", type: "textarea" },
-    {
-      id: "gender",
-      name: "gender",
-      title: "Gender",
-      type: "radio",
-      options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
-        { label: "Other", value: "other" },
-      ],
-    },
-    { id: "image", name: "image", title: "User Image", type: "file" },
-  ];
+  const fields = updateProfile
 
   const formik = useFormik({
     initialValues: useInitialValues("update_profile"),

@@ -27,8 +27,20 @@ const confirmPasswordValidation = Yup.string()
 const divValidation = Yup.string().required(" div is required");
 const roleValidation = Yup.string().required(" role is required ");
 const departmentValidation = Yup.string().required(" department is required ");
+const reasonValidation = Yup.string()
+  .min(3, "Must be 3 characters or more")
+  .max(200, "Must be 200 characters or less")
+  .required("Reason is required");
+const leaveTypeValidation = Yup.string().required("Leave type is required");
+const startDateValidation = Yup.date()
+  .required("Start date is required")
+  .typeError("Start date must be a valid date");
+const endDateValidation = Yup.date()
+  .required("End date is required")
+  .typeError("End date must be a valid date");
+const requestToIdValidation = Yup.string().required("Request to ID is required");
 
-function useModelValidation(type) {
+function useModelValidation(type : string) {
   let modelValidation: any = "";
   if (type === "add_student") {
     modelValidation = Yup.object({
@@ -50,6 +62,15 @@ function useModelValidation(type) {
       image: imageValidation,
       phone: phoneValidation,
       address:addressValidation,
+    });
+  }
+  if (type === "apply_leave") {
+    modelValidation = Yup.object({
+      reason: reasonValidation,
+      leaveType: leaveTypeValidation,
+      startDate: startDateValidation,
+      endDate: endDateValidation,
+      requestToId: requestToIdValidation,
     });
   }
 

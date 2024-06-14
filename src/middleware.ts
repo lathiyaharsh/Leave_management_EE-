@@ -35,7 +35,7 @@ export default async function middleware(req: NextRequest) {
   if (authRoutes.some((route) => nextUrlPath.startsWith(route))) {
     if (token) {
       try {
-        const secretKey = process.env.SECRETKEY;
+        const secretKey  = process.env.SECRETKEY;
         const secretBytes = new TextEncoder().encode(secretKey);
         const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
           payload: { role: string; _id: string };

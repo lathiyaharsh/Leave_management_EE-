@@ -125,5 +125,70 @@ const ImageInput = ({ field, touched, error }) => {
     </div>
   );
 };
+const DateInput = ({ field, touched, error }) => {
+  const { id, name, title, onChange, onBlur, value } = field;
 
-export { TextInput, TextArea, RadioButtonGroup, ImageInput };
+  // Calculate the next day in YYYY-MM-DD format
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  const nextDay = today.toISOString().split("T")[0]; // Get YYYY-MM-DD format
+
+  return (
+    <div className="mb-4">
+      <label
+        htmlFor={id}
+        className="block text-gray-700 text-sm font-bold mb-2"
+      >
+        {title}
+      </label>
+      <input
+        type="date"
+        id={id}
+        name={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        min={nextDay} // Set minimum date to next day
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+      {touched && error ? (
+        <div className="text-red-500 text-xs italic">{error}</div>
+      ) : null}
+    </div>
+  );
+};
+
+const SelectInput = ({ field, touched, error , options}) => {
+  const { id, name, title, onChange, onBlur, value } = field;
+
+  return (
+    <div className="mb-4">
+      <label
+        htmlFor={id}
+        className="block text-gray-700 text-sm font-bold mb-2"
+      >
+        {title}
+      </label>
+      <select
+        id={id}
+        name={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        <option value="">Select {title}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {touched && error ? (
+        <div className="text-red-500 text-xs italic">{error}</div>
+      ) : null}
+    </div>
+  );
+};
+
+export { TextInput, TextArea, RadioButtonGroup, ImageInput , DateInput , SelectInput};

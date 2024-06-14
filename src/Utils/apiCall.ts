@@ -15,7 +15,7 @@ export const postApiCallWithImage = async (url: string, data: any) => {
   try {
     const res: any = await axios.post(`${baseUrl + url}`, data, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
     });
@@ -41,7 +41,7 @@ export const putApiCall = async (url: string, data: any) => {
   try {
     const res: any = await axios.put(`${baseUrl + url}`, data, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
     });
