@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Pie } from "react-chartjs-2";
+import "chart.js/auto";
 import { getApiCall, postApiCall } from "@/Utils/apiCall";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setLeaveBalance } from "@/lib/redux/actions/leaveBalance";
@@ -13,12 +15,18 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { setUsers } from "@/lib/redux/actions/userActions";
 import { useUserContext } from "@/app/context/userContext";
-
+function convertNegativeToZero(number) {
+  if (number < 0) {
+    return 0;
+  } else {
+    return number;
+  }
+}
 const FecultyFetcher = () => {
   const dispatch = useAppDispatch();
   const [user] = useUserContext();
   let url = "/user/userList?limit=100&roleType=3";
-  
+
   useEffect(() => {
     const getApi = async (url: string) => {
       try {
@@ -61,7 +69,8 @@ function Leave() {
     };
 
     fetchLeaveData();
-  }, []);
+  }, [dispatch]);
+
   const formik = useFormik({
     initialValues: useInitialValues("apply_leave"),
     validationSchema: useModelValidation("apply_leave"),
@@ -97,8 +106,37 @@ function Leave() {
       });
     }
   }
+
   const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
     formik;
+
+  const pieData = {
+    labels: ["Attendance", "Used Leave"],
+    datasets: [
+      {
+        data: [
+          leaveData?.totalWorkingDays - leaveData?.usedLeave,
+          leaveData?.usedLeave,
+        ],
+        backgroundColor: ["#36A2EB", "#FF6384"],
+        hoverBackgroundColor: ["#36A2EB", "#FF6384"],
+      },
+    ],
+  };
+  const pieData1 = {
+    labels: ["Total Leave", "AvailableLeave Leave"],
+    datasets: [
+      {
+        data: [
+          leaveData?.totalLeave,
+          convertNegativeToZero(leaveData?.availableLeave),
+        ],
+        backgroundColor: ["#36A2EB", "#FF6384"],
+        hoverBackgroundColor: ["#36A2EB", "#FF6384"],
+      },
+    ],
+  };
+  const remainingLeave = convertNegativeToZero(leaveData?.availableLeave);
   return (
     <>
       {loading ? (
@@ -106,60 +144,86 @@ function Leave() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
         </div>
       ) : (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <div className="mt-4 text-center">
-              <h2 className="text-xl font-semibold text-black">
+        <div className="bg-gray-100 flex items-center justify-center p-3">
+          <div className="bg-white py-40 px-6 flex justify-evenly rounded-lg shadow-lg w-full  gap-8">
+            <div className="flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Attendance
+              </h2>
+              <Pie data={pieData} className="max-w-xs" />
+            </div>
+
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Leave Balance
               </h2>
-              <div className="mt-4">
-                <p className="text-gray-800">Total Leave</p>
-                <p className="text-gray-600">{leaveData?.totalLeave}</p>
-              </div>
-              <div className="mt-4">
-                <p className="text-gray-800">Available Leave</p>
-                <p className="text-gray-600">{leaveData?.availableLeave}</p>
-              </div>
-              <div className="mt-4">
-                <p className="text-gray-800">Used Leave</p>
-                <p className="text-gray-600">{leaveData?.usedLeave}</p>
-              </div>
-              <div className="mt-4">
-                <p className="text-gray-800">Total WorkingDays</p>
-                <p className="text-gray-600">{leaveData?.totalWorkingDays}</p>
-              </div>
-              <div className="mt-4">
-                <p className="text-gray-800">Attendance Percentage</p>
-                <p className="text-gray-600">
-                  {leaveData?.attendancePercentage}
-                </p>
-              </div>
-              <div className="mt-4">
-                <p className="text-gray-800">Academic Year</p>
-                <p className="text-gray-600">{leaveData?.academicYear}</p>
-              </div>
-              <div className="mt-4">
-                <button
-                  onClick={() => {
-                    router.push("/user/leavestatus");
-                  }}
-                  className=" px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                  Leave Status
-                </button>
-                <button
-                  onClick={() => {
-                    setViewModel(true);
-                  }}
-                  className="ms-12 px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                  Apply Leave
-                </button>
+              <div className="mt-6">
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Total Leave
+                  </p>
+                  <p className="text-gray-600">{leaveData?.totalLeave}</p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Available Leave
+                  </p>
+                  <p className="text-gray-600">{remainingLeave}</p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Used Leave
+                  </p>
+                  <p className="text-gray-600">{leaveData?.usedLeave}</p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Total Working Days
+                  </p>
+                  <p className="text-gray-600">{leaveData?.totalWorkingDays}</p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Attendance Percentage
+                  </p>
+                  <p className="text-gray-600">
+                    {leaveData?.attendancePercentage}%
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-lg font-medium text-gray-800">
+                    Academic Year
+                  </p>
+                  <p className="text-gray-600">{leaveData?.academicYear}</p>
+                </div>
+                <div className="mt-6 flex justify-center space-x-4">
+                  <button
+                    onClick={() => {
+                      router.push("/user/leavestatus");
+                    }}
+                    className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+                  >
+                    Leave Status
+                  </button>
+                  <button
+                    onClick={() => {
+                      setViewModel(true);
+                    }}
+                    className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700"
+                  >
+                    Apply Leave
+                  </button>
+                </div>
               </div>
             </div>
-            {  }
+            <div className="flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Available Leave
+              </h2>
+              <Pie data={pieData1} className="max-w-xs" />
+            </div>
             {viewModel && (
-              <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-blur-sm">
                 <FecultyFetcher />
                 <div className="relative p-4 w-full max-w-md max-h-full">
                   <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -194,8 +258,8 @@ function Leave() {
                       </button>
                     </div>
 
-                    <div className=" bg-gray-100  flex items-center justify-center ">
-                      <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8  w-full">
+                    <div className="bg-gray-100 flex items-center justify-center">
+                      <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 w-full">
                         <form onSubmit={formik.handleSubmit}>
                           <FieldGroup
                             fields={fields}

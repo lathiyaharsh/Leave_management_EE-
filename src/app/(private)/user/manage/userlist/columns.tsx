@@ -63,25 +63,26 @@ export const getColumns = (setViewModel, setEditUserData,formik) => [
     },
   },
   {
+    accessorKey: "address",
+    header: "address",
+  },
+  {
+    accessorKey: "grNumber",
+    header: "grNumber",
+  },
+  {
+    accessorKey: "department",
+    header: "department",
+  },
+  {
+    accessorKey: "div",
+    header: "div",
+  },
+  {
     header: "Action",
     id: "actions",
     cell: ({ row }) => {
       const userData = row.original;
-      // const updateLeaveData = async (url: string) => {
-      //   try {
-      //     toast.success("Processing...");
-      //     const result = await getApiCall(url);
-      //     if (result?.status == 200) {
-      //       toast.success(result.data.message);
-      //       setReloadData((prev) => !prev); // Trigger a data refresh
-      //     }else {
-      //       toast.error(result.message);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error:", error);
-      //     toast.error("An error occurred. Please try again.");
-      //   }
-      // };
       return (
         <>
           <DropdownMenu>
@@ -110,21 +111,5 @@ export const getColumns = (setViewModel, setEditUserData,formik) => [
         </>
       );
     },
-  },
-  {
-    accessorKey: "address",
-    header: "address",
-  },
-  {
-    accessorKey: "grNumber",
-    header: "grNumber",
-  },
-  {
-    accessorKey: "department",
-    header: "department",
-  },
-  {
-    accessorKey: "div",
-    header: "div",
   },
 ];

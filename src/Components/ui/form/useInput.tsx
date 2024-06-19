@@ -130,7 +130,7 @@ const DateInput = ({ field, touched, error }) => {
 
   // Calculate the next day in YYYY-MM-DD format
   const today = new Date();
-  today.setDate(today.getDate() + 1);
+  today.setDate(today.getDate());
   const nextDay = today.toISOString().split("T")[0]; // Get YYYY-MM-DD format
 
   return (

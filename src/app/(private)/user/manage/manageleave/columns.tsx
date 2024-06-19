@@ -56,6 +56,23 @@ export const getColumns = (setReloadData) => [
     },
   },
   {
+    accessorKey: "userLeave.usedLeave",
+    header: "Used Leave",
+  },
+  {
+    accessorKey: "userLeave.availableLeave",
+    header: "Available Leave",
+  },
+  {
+    accessorKey: "requestedTo.email",
+    header: "Requested To email",
+  },
+  {
+    accessorKey: "requestedTo.name",
+    header: "Requested To name",
+  },
+
+  {
     header: "Action",
     id: "actions",
     cell: ({ row }) => {
@@ -111,21 +128,5 @@ export const getColumns = (setReloadData) => [
         </>
       );
     },
-  },
-  {
-    accessorKey: "userLeave.usedLeave",
-    header: "Used Leave",
-  },
-  {
-    accessorKey: "userLeave.availableLeave",
-    header: "Available Leave",
-  },
-  {
-    accessorKey: "requestedTo.email",
-    header: "Requested To email",
-  },
-  {
-    accessorKey: "requestedTo.name",
-    header: "Requested To name",
   },
 ];
