@@ -6,6 +6,7 @@ import {
   ImageInput,
   DateInput,
   SelectInput,
+  SelectInputNormal
 } from "./useInput";
 
 const FieldGroup = ({ fields, formik, options }) => {
@@ -80,6 +81,20 @@ const FieldGroup = ({ fields, formik, options }) => {
                   value: formik.values[field.name],
                 }}
                 options={options[field.name]}
+                touched={formik.touched[field.name]}
+                error={formik.errors[field.name]}
+              />
+            );
+            case "Normal Select":
+            return (
+              <SelectInputNormal
+                key={field.id}
+                field={{
+                  ...field,
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  value: formik.values[field.name],
+                }}
                 touched={formik.touched[field.name]}
                 error={formik.errors[field.name]}
               />

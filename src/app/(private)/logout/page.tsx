@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Logout = () => {
-  const [user, setUser] = useUserContext();
+  const [,setUser] = useUserContext();
   const router = useRouter();
   useEffect(() => {
     const logout = async () => {

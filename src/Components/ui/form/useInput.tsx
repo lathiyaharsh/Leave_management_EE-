@@ -191,4 +191,37 @@ const SelectInput = ({ field, touched, error , options}) => {
   );
 };
 
-export { TextInput, TextArea, RadioButtonGroup, ImageInput , DateInput , SelectInput};
+const SelectInputNormal = ({ field, touched, error  }) => {
+  const { id, name, title, onChange, onBlur, value , options} = field;
+
+  return (
+    <div className="mb-4">
+      <label
+        htmlFor={id}
+        className="block text-gray-700 text-sm font-bold mb-2"
+      >
+        {title}
+      </label>
+      <select
+        id={id}
+        name={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        <option value="">Select {title}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {touched && error ? (
+        <div className="text-red-500 text-xs italic">{error}</div>
+      ) : null}
+    </div>
+  );
+};
+
+export { TextInput, TextArea, RadioButtonGroup, ImageInput , DateInput , SelectInput , SelectInputNormal};

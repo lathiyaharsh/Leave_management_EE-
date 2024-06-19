@@ -4,16 +4,16 @@ import * as jose from "jose";
 // Define the protected non-API routes
 const protectedRoutes: Record<string, string[]> = {
   student: ["/user/leave"],
-  hod: [ "/lms/hod"],
-  faculty: ["/lms/faculty"],
-  admin: ["/admin", "/lms/admin"],
+  faculty: ["/dashboard","/lms/faculty","/user/manage"],
+  admin: ["/dashboard","/admin", "/user/admin","/user/manage"],
 };
-const commonRoutes = ["/dashboard", "/profile","/logout","/user/leave"]; //protected
+const commonRoutes = ["/dashboard", "/profile","/logout"]; //protected
 const authRoutes = ["/login", "/register"];
-const publicRoutes = ["/blog", "/about", "/lmsAuth"];
+const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword", ];
 
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("jwt")?.value;
+  
   const nextUrlPath = req.nextUrl.pathname;
 
   if (nextUrlPath.startsWith("/api")) {
@@ -40,8 +40,8 @@ export default async function middleware(req: NextRequest) {
         const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
           payload: { role: string; _id: string };
         };
-
-        const role = payload?.userDetails?.role;
+       
+        const role = payload?.data?.role;
         const userProtectedRoutes = protectedRoutes[role] || [];
 
         const dashboardURL = new URL(
@@ -83,7 +83,7 @@ export default async function middleware(req: NextRequest) {
         payload: { userDetails : any };
       };
 
-      const role = payload?.userDetails?.role;
+      const role = payload?.data?.role;
 
       const userProtectedRoutes = protectedRoutes[role] || [];
       const allUserProtectedRoutes = [...commonRoutes,...userProtectedRoutes];

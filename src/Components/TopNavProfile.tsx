@@ -12,28 +12,14 @@ function TopNavProfile({ user }) {
   const userRole = user?.user?.user || "Guest";
   const userName = user?.user?.name;
   const student: { title: string; href: string }[] = [
-    {
-      title: "Student",
-      href: "#",
-    },
+   
   ];
-  const hod: { title: string; href: string }[] = [
-    {
-      title: "Hod",
-      href: "/docs/primitives/alert-dialog",
-    }
-  ];
+  
   const faculty: { title: string; href: string }[] = [
-    {
-      title: "Faculty",
-      href: "/docs/primitives/alert-dialog",
-    }
+   
   ];
   const admin: { title: string; href: string }[] = [
-    {
-      title: "Admin",
-      href: "/docs/primitives/alert-dialog",
-    }
+   
   ];
   const guest: { title: string; href: string }[] = [
     {
@@ -79,8 +65,6 @@ function TopNavProfile({ user }) {
       ? guest
       : userRole === "student"
         ? student
-        : userRole === "hod"
-          ? hod
           : userRole === "faculty"
             ? faculty
             : userRole === "admin"

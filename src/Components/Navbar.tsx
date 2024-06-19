@@ -5,7 +5,9 @@ import { useUserContext } from "@/app/context/userContext";
 import SideBarUl from "@/Components/Sidebar";
 import TopNavProfile from "./TopNavProfile";
 import SideBarLi from "./ui/SideBarli";
-
+import downArrow from "@/app/assets/images/down.png";
+import menuIcon from "@/app/assets/images/menus.png";
+import Image from "next/image";
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -54,19 +56,12 @@ const NavBar = () => {
                 onClick={toggleSidebar}
               >
                 <span className="sr-only">Open sidebar</span>
-                <svg
-                  className="w-6 h-6"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                  ></path>
-                </svg>
+                <Image
+                src={menuIcon}
+                alt="Profile Picture"
+                width={20}
+                height={20}
+              />
               </button>
               <a href="/" className="flex ms-2 md:me-24">
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
@@ -100,33 +95,15 @@ const NavBar = () => {
                   aria-controls="dropdown-example"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  <svg
-                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 18 21"
-                  >
-                    <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.205 0H1a1 1 0 0 0 0 2h.3l1.5 6.058-1.2 3.6A1 1 0 0 0 2 13h12ZM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM14 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                  </svg>
                   <span className="flex-1 ms-3 text-left whitespace-nowrap">
-                    {user?.user}
+                    Manage
                   </span>
-                  <svg
-                    className="w-6 h-6"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
+                  <Image
+                    src={downArrow}
+                    alt="Profile Picture"
+                    width={20}
+                    height={20}
+                  />
                 </button>
                 {isOpen && (
                   <>

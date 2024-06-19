@@ -18,14 +18,12 @@ const FecultyFetcher = () => {
   const dispatch = useAppDispatch();
   const [user] = useUserContext();
   let url = "/user/userList?limit=100&roleType=3";
-  if ((user.user = "faculty")) url = "/user/userList?limit=25&roleType=2";
-  if ((user.user = "hod")) url = "/user/userList?limit=25&roleType=1";
+  
   useEffect(() => {
     const getApi = async (url: string) => {
       try {
         const result = await getApiCall(url);
         if (result?.data?.userList) {
-          console.log(result?.data?.userList);
           dispatch(setUsers(result?.data?.userList));
         }
       } catch (error) {
@@ -159,6 +157,7 @@ function Leave() {
                 </button>
               </div>
             </div>
+            {  }
             {viewModel && (
               <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <FecultyFetcher />

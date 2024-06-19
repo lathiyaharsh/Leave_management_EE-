@@ -9,17 +9,18 @@ import { useUserContext } from "@/app/context/userContext";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
-import { putApiCall } from "@/Utils/apiCall";
+import { getApiCall, putApiCall } from "@/Utils/apiCall";
 import { updateProfile } from "@/Components/ui/form/fields";
+import { UserFetcher } from "@/service/user";
 
 function Profile() {
   const [loading, setLoading] = useState(false);
   const [viewModel, setViewModel] = useState(false);
   const router = useRouter();
-  const [user,setUser] = useUserContext();
+  const [user, setUser] = useUserContext();
   const { name, email, gender, image, phone, department, address, div } = user;
 
-  const fields = updateProfile
+  const fields = updateProfile;
 
   const formik = useFormik({
     initialValues: useInitialValues("update_profile"),
@@ -29,10 +30,17 @@ function Profile() {
         setLoading(true);
         const result = await putApiCall("/user/editProfile", values);
         if (result?.status == 200) {
+          if(typeof(values.image) == "object"){
+            const userData = await getApiCall('/user/profile');
+            setUser(userData.data.profile)
+          }else{
+            setUser((v) => {
+              return { ...v, ...values };
+            });
+          }
           setLoading(false);
-          setUser((v)=>{return { ...v , ...values }})
           toast.success("Update successful");
-          setViewModel(false)
+          setViewModel(false);
           formik.resetForm();
         } else {
           toast.error(result.message);
@@ -46,57 +54,65 @@ function Profile() {
   });
   const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
     formik;
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
         <>
-          <div className="flex items-center justify-center">
-            <Image
-              src={image}
-              alt="User Avatar"
-              className="rounded w-36 h-36"
-              width={150}
-              height={150}
-            />
-          </div>
-          <div className="mt-4 text-center">
-            <h2 className="text-xl font-semibold text-black">{user.name}</h2>
-            <p className="text-gray-600">{email}</p>
-            <div className="mt-4">
-              <p className="text-gray-800">Div:</p>
-              <p className="text-gray-600">{div ? div : "Not assined"} </p>
+          {!user ? (
+            <div className="flex justify-center mt-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
             </div>
-            <div className="mt-4">
-              <p className="text-gray-800">Address:</p>
-              <p className="text-gray-600">{address}</p>
-            </div>
-            <div className="mt-4">
-              <p className="text-gray-800">Phone:</p>
-              <p className="text-gray-600">{phone}</p>
-            </div>
-            <div className="mt-4">
-              <p className="text-gray-800">Gender:</p>
-              <p className="text-gray-600">{gender}</p>
-            </div>
+          ) : (
+            <>
+              <div className="flex items-center justify-center">
+                <Image
+                  src={user.image}
+                  alt="User Avatar"
+                  className="rounded w-36 h-36"
+                  width={150}
+                  height={150}
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h2 className="text-xl font-semibold text-black">
+                  {user.name}
+                </h2>
+                <p className="text-gray-600">{email}</p>
+                <div className="mt-4">
+                  <p className="text-gray-800">Div:</p>
+                  <p className="text-gray-600">{div ? div : "Not assined"} </p>
+                </div>
+                <div className="mt-4">
+                  <p className="text-gray-800">Address:</p>
+                  <p className="text-gray-600">{address}</p>
+                </div>
+                <div className="mt-4">
+                  <p className="text-gray-800">Phone:</p>
+                  <p className="text-gray-600">{phone}</p>
+                </div>
+                <div className="mt-4">
+                  <p className="text-gray-800">Gender:</p>
+                  <p className="text-gray-600">{gender}</p>
+                </div>
 
-            <div className="mt-4">
-              <p className="text-gray-800">Role:</p>
-              <p className="text-gray-600">{user?.user}</p>
-            </div>
-            <div className="mt-4">
-              <button
-                onClick={() => {
-                  formik.setValues(user);
-                  setViewModel(true);
-                }}
-                className="px-4 py-2 bg-blue-500 text-white rounded"
-              >
-                Edit Profile
-              </button>
-            </div>
-          </div>
-
+                <div className="mt-4">
+                  <p className="text-gray-800">Role:</p>
+                  <p className="text-gray-600">{user?.user}</p>
+                </div>
+                <div className="mt-4">
+                  <button
+                    onClick={() => {
+                      formik.setValues(user);
+                      setViewModel(true);
+                    }}
+                    className="px-4 py-2 bg-blue-500 text-white rounded"
+                  >
+                    Edit Profile
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
           {viewModel && (
             <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
               <div className="relative p-4 w-full max-w-md max-h-full">

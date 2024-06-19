@@ -59,7 +59,7 @@ export default function RootLayout({
               <body className={inter.className}>
                 <NavBar />
                 <div className="top-nav-spacer"></div>
-                <>{children}</>
+                <div className="ms-72">{children}</div>
                 <ToastContainer />
               </body>
             </html>

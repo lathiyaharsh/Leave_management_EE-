@@ -1,18 +1,21 @@
-"use client";
+import {  MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import moment from "moment";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { getApiCall } from "@/Utils/apiCall";
+import { toast } from "react-toastify";
 
-import { ColumnDef } from "@tanstack/react-table";
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const getColumns = (setReloadData) => [
   {
     accessorKey: "id",
-    header: "Id",
+    header: "Leave Id",
   },
   {
     accessorKey: "startDate",
@@ -36,17 +39,60 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
+    header: "Create Date",
     cell: ({ row }) => {
-      const timestamp = parseFloat(row.getValue("createdAt"));
-      const date = new Date(timestamp);
-      const formatted = date.toISOString().split("T")[0];
-
+      const timestamp = row.getValue("createdAt");
+      const date = moment(timestamp);
+      const formatted = date.format("YYYY-MM-DD");
       return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     accessorKey: "requestedTo.name",
     header: "Requested To",
+  },
+  {
+    accessorKey: "requestedTo.email",
+    header: "Requested To Email",
+  },
+
+  {
+    header: "Action",
+    id: "actions",
+    cell: ({ row }) => {
+      const leave = row.original;
+      const updateLeaveData = async (url: string) => {
+        try {
+          toast.success("Processing...");
+          const result = await getApiCall(url);
+          if (result?.status == 200) {
+            toast.success(result.data.message);
+            setReloadData((prev) => !prev); // Trigger a data refresh
+          }else {
+            toast.error(result.message);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          toast.error("An error occurred. Please try again.");
+        }
+      };
+      return (
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+             
+              
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
+      );
+    },
   },
 ];

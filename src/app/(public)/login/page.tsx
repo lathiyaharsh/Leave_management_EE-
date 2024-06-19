@@ -3,37 +3,25 @@ import { useRoleContext } from "@/app/context/userRole";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getApiCall, postApiCall } from "@/Utils/apiCall";
 import { useUserContext } from "@/app/context/userContext";
-
+import Link from "next/link";
+import useModelValidation from "@/Components/ui/form/formValidation";
+import useInitialValues from "@/Components/ui/form/useInitialValues";
+import FieldGroup from "@/Components/ui/form/useInputGroup";
+import { login } from "@/Components/ui/form/fields";
 function Login() {
-  const [role, setRole] = useRoleContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [user, setUser] = useUserContext();
   const [signUpLoading, setSignUpLoading] = useState(false);
   const router = useRouter();
 
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      password: Yup.string()
-        .min(3, "Must be 3 characters or more")
-        .max(12, "Must be 12 characters or less")
-        .required("Password is required"),
-    }),
+    initialValues: useInitialValues("login"),
+    validationSchema: useModelValidation("login"),
     onSubmit: async (values) => {
       try {
-        console.log(values)
         setSignUpLoading(true);
         const result = await postApiCall("/auth/login", values);
 
@@ -66,6 +54,7 @@ function Login() {
   });
   const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
     formik;
+  const fields = login;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -76,63 +65,26 @@ function Login() {
         <div className="text-3xl text-black font-bold underline text-center mb-6">
           Login
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            placeholder="Enter your email"
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          {touched.email && errors.email ? (
-            <div className="text-red-500 text-xs italic">{errors.email}</div>
-          ) : null}
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            placeholder="Enter your password"
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
-          />
-          {touched.password && errors.password ? (
-            <div className="text-red-500 text-xs italic">{errors.password}</div>
-          ) : null}
-        </div>
+        <FieldGroup fields={fields} formik={formik} />
+        <Link
+          href="/password/forgetpassword"
+          className="text-sm text-blue-700 "
+        >
+          Forget Password?
+        </Link>
         {signUpLoading ? (
-            <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            </div>
-          ) : (
-        <div className="flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Log In
-          </button>
-        </div>
+          <div className="flex justify-center mt-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Log In
+            </button>
+          </div>
         )}
       </form>
     </div>

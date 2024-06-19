@@ -18,7 +18,6 @@ const SignUp = () => {
     onSubmit: async (values) => {
       try {
         setSignUpLoading(true);
-        console.log(values);
         const result = await postApiCallWithImage("/user/register", values);
         if (result?.status == 201) {
           setSignUpLoading(false);

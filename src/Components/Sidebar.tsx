@@ -3,26 +3,41 @@ import React from "react";
 
 const student: { title: string; href: string }[] = [
   {
-    title: "Student",
-    href: "/docs/primitives/alert-dialog",
+    title: "Leave Status",
+    href: "/user/leavestatus",
   },
 ];
-const hod: { title: string; href: string }[] = [
-  {
-    title: "Hod",
-    href: "/docs/primitives/alert-dialog",
-  },
-];
+
 const faculty: { title: string; href: string }[] = [
   {
-    title: "Faculty",
-    href: "/docs/primitives/alert-dialog",
+    title: "Add User",
+    href: "/user/manage/adduser",
+  },
+  {
+    title: "Leave Requests",
+    href: "/user/manage/manageleave",
+  },
+  {
+    title: "Student List",
+    href: "/user/manage/userlist",
   },
 ];
 const admin: { title: string; href: string }[] = [
   {
-    title: "Admin",
-    href: "/docs/primitives/alert-dialog",
+    title: "Add User",
+    href: "/user/manage/adduser",
+  },
+  {
+    title: "Leave Requests",
+    href: "/user/manage/manageleave",
+  },
+  {
+    title: "Student List",
+    href: "/user/manage/userlist",
+  },
+  {
+    title: "Faculty List",
+    href: "/user/admin/facultylist",
   },
 ];
 
@@ -31,13 +46,11 @@ function SideBarUl({ role }) {
   const components =
     user === "student"
       ? student
-      : user === "hod"
-        ? hod
-        : user === "faculty"
-          ? faculty
-          : user === "admin"
-            ? admin
-            : null;
+      : user === "faculty"
+        ? faculty
+        : user === "admin"
+          ? admin
+          : null;
   return (
     <>
       <ul id="dropdown-example" className="py-2 space-y-2">
