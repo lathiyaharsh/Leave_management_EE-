@@ -2,7 +2,8 @@
 import { getApiCall } from "@/Utils/apiCall";
 import { useState, useEffect } from "react";
 import { getColumns } from "./columns"; // Import the function
-import { DataTable } from "./data-table";
+
+import { DataTable } from "@/Components/DataTable/data-table";
 import Image from "next/image";
 import nextArrow from "@/app/assets/images/fast-forward.png";
 import backArrow from "@/app/assets/images/fast-backward.png";
@@ -59,6 +60,7 @@ export default function DemoPage() {
               query={query}
               setGetSorting={setGetSorting}
               getSorting={getSorting}
+              urlType={'manageLeave'}
             />
              <ul className="flex items-center -space-x-px h-10 text-base justify-end">
             {/* Pagination controls */}

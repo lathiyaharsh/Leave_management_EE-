@@ -41,7 +41,8 @@ export function DataTable<TData, TValue>({
   setQuery,
   query,
   setGetSorting,
-  getSorting
+  getSorting,
+  urlType,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -52,14 +53,57 @@ export function DataTable<TData, TValue>({
   const fetchFilteredData = async (query: string, sorting: SortingRule[]) => {
     setLoading(true);
     try {
-      const sortParams = sorting.map((sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`);
-      const result = await getApiCall(
-        `/user/studentList?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
-      );
-      
-      if (result?.data?.userList) {
-        setData(result.data.userList); // Update the data with the result from API call
-        setMaxPage(result.data.maxPage);
+      if (urlType == "studentList") {
+        const sortParams = sorting.map(
+          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+        );
+
+        const result = await getApiCall(
+          `/user/studentList?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
+        );
+
+        if (result?.data?.userList) {
+          setData(result.data.userList); // Update the data with the result from API call
+          setMaxPage(result.data.maxPage);
+        }
+      }
+      if (urlType == "manageLeave") {
+        const sortParams = sorting.map(
+          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+        );
+        const result = await getApiCall(
+          `/leave/leaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
+        );
+        if (result?.data?.leaveStatus) {
+          setData(result.data.leaveStatus);
+          setMaxPage(result.data.maxPage);
+        }
+      }
+      if (urlType == "leaveStatus") {
+        const sortParams = sorting.map(
+          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+        );
+        const result = await getApiCall(
+          `/leave/userLeaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
+        );
+
+        if (result?.data?.leaveStatus) {
+          setData(result.data.leaveStatus);
+          setMaxPage(result.data.maxPage);
+        }
+      }
+      if (urlType == "facultyList") {
+        const sortParams = sorting.map(
+          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+        );
+        const result = await getApiCall(
+          `/user/facultyList?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
+        );
+
+        if (result?.data?.userList) {
+          setData(result.data.userList); // Update the data with the result from API call
+          setMaxPage(result.data.maxPage);
+        }
       }
     } catch (error) {
       console.error("Error fetching filtered data:", error);
@@ -93,7 +137,7 @@ export function DataTable<TData, TValue>({
     },
   });
   useEffect(() => {
-    fetchFilteredData(query, sorting);
+    fetchFilteredData(query, sorting, urlType);
   }, [currentPage, sorting, query]);
   return (
     <div>
@@ -182,7 +226,6 @@ export function DataTable<TData, TValue>({
           </table>
         </div>
       )}
-      
     </div>
   );
 }

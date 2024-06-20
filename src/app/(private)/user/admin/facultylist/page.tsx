@@ -1,7 +1,7 @@
 "use client";
 import { getApiCall } from "@/Utils/apiCall";
 import { getColumns } from "./columns"; // Import the function
-import { DataTable } from "./data-table";
+import { DataTable } from "@/Components/DataTable/data-table";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -114,6 +114,7 @@ export default function DemoPage() {
               query={query}
               setGetSorting={setGetSorting}
               getSorting={getSorting}
+              urlType={'facultyList'}
             />
             <ul className="flex items-center -space-x-px h-10 text-base justify-end">
             {/* Pagination controls */}
