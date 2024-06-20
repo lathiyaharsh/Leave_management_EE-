@@ -12,29 +12,31 @@ function StudentFacultyComponent() {
   const [loading, setLoading] = useState(true);
   const [user] = useUserContext();
   useEffect(() => {
-    fetchLeaveData(currentYear, currentMonth);
-  }, [currentYear, currentMonth]);
+    const fetchLeaveData = async (year: number, month: number) => {
+      setLoading(true);
+      try {
+        let url = `/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`;
+        if (user.user == "faculty" || user.user == "admin") {
+          url = `/leave/leaveStatus?year=${year}&month=${month}&limit=1000`;
+        }
+        const response = await getApiCall(url);
+        if (response.data.leaveStatus) {
+          const processedLeaveData = prepareLeaveData(
+            response.data.leaveStatus
+          );
+          setLeaveData(processedLeaveData);
+        } else {
+          console.error("Failed to fetch leave data", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching leave data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchLeaveData = async (year, month) => {
-    setLoading(true);
-    try {
-      let url =`/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`
-      if(user.user == 'faculty' || user.user == 'admin') {
-        url = `/leave/leaveStatus?year=${year}&month=${month}&limit=1000`
-      }
-      const response = await getApiCall(url);
-      if (response.data.leaveStatus) {
-        const processedLeaveData = prepareLeaveData(response.data.leaveStatus);
-        setLeaveData(processedLeaveData);
-      } else {
-        console.error("Failed to fetch leave data", response.data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching leave data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchLeaveData(currentYear, currentMonth);
+  }, [currentYear, currentMonth, user?.user]);
 
   const handlePrevMonth = () => {
     const newMonth = currentMonth === 0 ? 11 : currentMonth - 1;
@@ -50,7 +52,7 @@ function StudentFacultyComponent() {
     setCurrentYear(newYear);
   };
 
-  const handleYearChange = (year) => {
+  const handleYearChange = (year: number) => {
     setCurrentYear(year);
   };
   return (

@@ -2,13 +2,12 @@
 import { getApiCall } from "@/Utils/apiCall";
 import { useState, useEffect } from "react";
 import { getColumns } from "./columns"; // Import the function
-
 import { DataTable } from "@/Components/DataTable/data-table";
 import Image from "next/image";
 import nextArrow from "@/app/assets/images/fast-forward.png";
 import backArrow from "@/app/assets/images/fast-backward.png";
 import Loading from "@/Components/Loading";
-
+import { SortType, User } from "@/Utils/types";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -21,10 +20,10 @@ export default function DemoPage() {
   const fetchLeaveData = async () => {
     setLoading(true);
     try {
-      const searchQuery = `search=${encodeURIComponent(query)}`;
-      const sorting = getSorting;
-      const sortParams = sorting.map(
-        (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+      const searchQuery: string = `search=${encodeURIComponent(query)}`;
+      const sorting: any = getSorting;
+      const sortParams: string[] = sorting.map(
+        (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
       );
       const url = `/leave/leaveStatus?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
       const result = await getApiCall(url);
@@ -40,8 +39,28 @@ export default function DemoPage() {
   };
 
   useEffect(() => {
+    const fetchLeaveData = async () => {
+      setLoading(true);
+      try {
+        const searchQuery: string = `search=${encodeURIComponent(query)}`;
+        const sorting: any = getSorting;
+        const sortParams: string[] = sorting.map(
+          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+        );
+        const url = `/leave/leaveStatus?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
+        const result = await getApiCall(url);
+        if (result?.data?.leaveStatus) {
+          setData(result.data.leaveStatus);
+          setMaxPage(result.data.maxPage);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching leave data:", error);
+        setLoading(false);
+      }
+    };
     fetchLeaveData();
-  }, [currentPage, reloadData]);
+  }, [currentPage, reloadData,getSorting,query]);
   return (
     <>
       {loading ? (

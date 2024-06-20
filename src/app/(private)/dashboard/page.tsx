@@ -2,13 +2,10 @@
 import { useUserContext } from "@/app/context/userContext";
 import React from "react";
 import AdminComponent from "./AdminDashboard";
-import FacultyComponent from "../../../Components/old/FacultyDashboard";
 import StudentFacultyComponent from "./StudentFacultyDashboard";
 function Dashboard() {
   const [user] = useUserContext();
-
   const role: any = user?.user;
-
   if (!role) {
     return (
       <>

@@ -4,14 +4,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import moment from 'moment';
 import { Checkbox } from "@/components/ui/checkbox"
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+import { LeaveStatus } from "@/Utils/types";
 
-export const columns: ColumnDef<Payment>[] = [
+
+export const columns: ColumnDef<LeaveStatus>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -82,7 +78,7 @@ export const columns: ColumnDef<Payment>[] = [
         )
       },
     cell: ({ row }) => {
-      const timestamp = (row.getValue("createdAt"));
+      const timestamp : string= (row.getValue("createdAt"));
       const date = moment(timestamp);
       const formatted = date.format('YYYY-MM-DD');  
       return <div className="text-right font-medium">{formatted}</div>;

@@ -66,7 +66,7 @@ function Login() {
         <div className="text-3xl text-black font-bold underline text-center mb-6">
           Login
         </div>
-        <FieldGroup fields={fields} formik={formik} />
+        <FieldGroup fields={fields} formik={formik} options={''} />
         <Link
           href="/password/forgetpassword"
           className="text-sm text-blue-700 "

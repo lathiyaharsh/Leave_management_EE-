@@ -6,15 +6,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getApiCall } from "@/Utils/apiCall";
-import { toast } from "react-toastify";
-import FieldGroup from "@/Components/ui/form/useInputGroup";
 import Image from "next/image";
+import { User } from "@/Utils/types";
 
-export const getColumns = (setViewModel, setEditUserData,formik) => [
+export const getColumns = (setViewModel: (value: boolean) => void, setEditUserData: (userData: User) => void, formik: any) => [
   {
     accessorKey: "id",
     header: "User Id",
@@ -33,7 +30,7 @@ export const getColumns = (setViewModel, setEditUserData,formik) => [
   },
   {
     header: "image",
-    cell: ({ row }) => {
+    cell: ({ row }: { row: { original: User } }) => {
       const image = row.original.image;
       return (
         <>
@@ -55,7 +52,7 @@ export const getColumns = (setViewModel, setEditUserData,formik) => [
   {
     accessorKey: "createdAt",
     header: "Create Date",
-    cell: ({ row }) => {
+    cell: ({ row } : any) => {
       const timestamp = row.getValue("createdAt");
       const date = moment(timestamp);
       const formatted = date.format("YYYY-MM-DD");
@@ -81,7 +78,7 @@ export const getColumns = (setViewModel, setEditUserData,formik) => [
   {
     header: "Action",
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row }: { row: { original: User } }) => {
       const userData = row.original;
       return (
         <>

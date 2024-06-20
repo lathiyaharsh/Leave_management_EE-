@@ -42,7 +42,7 @@ const FecultyFetcher = () => {
     };
 
     getApi(url);
-  }, [dispatch]);
+  }, [dispatch,url]);
 
   return null;
 };

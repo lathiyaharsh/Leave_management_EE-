@@ -23,19 +23,18 @@ import { useRouter } from "next/navigation";
 export const UserFetcher = () => {
   try {
     const [, setUser] = useUserContext();
-    const router = useRouter();
-    const getApi = async () => {
-      try {
-        const result = await fetchUser();
-        setUser(result);
-      } catch (error) {
-        console.error("Error fetching user Role:", error);
-      }
-    };
 
     useEffect(() => {
+      const getApi = async () => {
+        try {
+          const result = await fetchUser();
+          setUser(result);
+        } catch (error) {
+          console.error("Error fetching user Role:", error);
+        }
+      };
       getApi();
-    }, []);
+    }, [setUser]);
 
     return null;
   } catch (error) {
@@ -58,7 +57,9 @@ export default function RootLayout({
               <body className={inter.className}>
                 <NavBar />
                 <div className="top-nav-spacer"></div>
-                <div className="side-bar-spacer sm:ms-60"><div className="sm:ms-4">{children}</div></div>
+                <div className="side-bar-spacer sm:ms-60">
+                  <div className="sm:ms-4">{children}</div>
+                </div>
                 <ToastContainer />
               </body>
             </html>

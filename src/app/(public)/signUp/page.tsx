@@ -46,7 +46,7 @@ const SignUp = () => {
           SignUp Page
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <FieldGroup fields={fields} formik={formik} />
+          <FieldGroup fields={fields} formik={formik} options={''} />
 
           
           {signUpLoading ? (

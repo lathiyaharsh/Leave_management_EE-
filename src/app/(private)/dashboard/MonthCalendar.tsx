@@ -1,7 +1,17 @@
 import React from "react";
 import { getDaysInMonth, leaveTypes } from "./utils";
+import { LeaveStatus } from "@/Utils/types";
 
-const MonthCalendar = ({
+interface MonthCalendarProps {
+  year: number;
+  month: number;
+  leaveData: Record<string, LeaveStatus[]>;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
+  onYearChange: (year: number) => void;
+}
+type LeaveTypes = keyof typeof leaveTypes;
+const MonthCalendar: React.FC<MonthCalendarProps> = ({
   year,
   month,
   leaveData,
@@ -45,7 +55,10 @@ const MonthCalendar = ({
           <div className="date">{date.getUTCDate()}</div>
           <div className="leaves">
             {leaves.map((leave, index) => (
-              <div key={index} className={`leave ${leaveTypes[leave.status]}`}>
+              <div
+                key={index}
+                className={`leave ${leaveTypes[leave.status as LeaveTypes]}`}
+              >
                 {leave.leaveType}/{leave?.requestedBy?.name}
               </div>
             ))}
@@ -65,7 +78,7 @@ const MonthCalendar = ({
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Leave Calander
+        Leave Calendar
       </h1>
       <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg">
         <button

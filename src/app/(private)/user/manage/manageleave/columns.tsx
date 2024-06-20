@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getApiCall } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
+import { LeaveStatus } from "@/Utils/types";
 
-export const getColumns = (setReloadData) => [
+
+export const getColumns = (setReloadData: (value: any) => void) => [
   {
     accessorKey: "id",
     header: "Leave Id",
@@ -48,7 +50,7 @@ export const getColumns = (setReloadData) => [
   {
     accessorKey: "createdAt",
     header: "Create Date",
-    cell: ({ row }) => {
+    cell: ({ row }: any) => {
       const timestamp = row.getValue("createdAt");
       const date = moment(timestamp);
       const formatted = date.format("YYYY-MM-DD");
@@ -75,7 +77,7 @@ export const getColumns = (setReloadData) => [
   {
     header: "Action",
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row }:{ row: { original: LeaveStatus } }) => {
       const leave = row.original;
       const updateLeaveData = async (url: string) => {
         try {
@@ -83,7 +85,7 @@ export const getColumns = (setReloadData) => [
           const result = await getApiCall(url);
           if (result?.status == 200) {
             toast.success(result.data.message);
-            setReloadData((prev) => !prev); // Trigger a data refresh
+            setReloadData((prev:boolean) => !prev); // Trigger a data refresh
           }else {
             toast.error(result.message);
           }

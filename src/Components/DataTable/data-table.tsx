@@ -24,14 +24,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { getApiCall } from "@/Utils/apiCall"; // Make sure this is correctly imported
+import { DataTableProps, SortType } from "@/Utils/types";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  setData: React.Dispatch<React.SetStateAction<TData[]>>; // Add this prop to handle data setting
-}
-
-export function DataTable<TData, TValue>({
+export function DataTable<T>({
   columns,
   data,
   setData,
@@ -43,19 +38,19 @@ export function DataTable<TData, TValue>({
   setGetSorting,
   getSorting,
   urlType,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [loading, setLoading] = useState(false); // Add loading state
 
-  const fetchFilteredData = async (query: string, sorting: SortingRule[]) => {
+  const fetchFilteredData = async (query: string, sorting: any) => {
     setLoading(true);
     try {
       if (urlType == "studentList") {
         const sortParams = sorting.map(
-          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort : SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
         );
 
         const result = await getApiCall(
@@ -69,7 +64,7 @@ export function DataTable<TData, TValue>({
       }
       if (urlType == "manageLeave") {
         const sortParams = sorting.map(
-          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/leave/leaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
@@ -81,7 +76,7 @@ export function DataTable<TData, TValue>({
       }
       if (urlType == "leaveStatus") {
         const sortParams = sorting.map(
-          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/leave/userLeaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
@@ -94,7 +89,7 @@ export function DataTable<TData, TValue>({
       }
       if (urlType == "facultyList") {
         const sortParams = sorting.map(
-          (sort) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/user/facultyList?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
@@ -137,8 +132,8 @@ export function DataTable<TData, TValue>({
     },
   });
   useEffect(() => {
-    fetchFilteredData(query, sorting, urlType);
-  }, [currentPage, sorting, query]);
+    fetchFilteredData(query, sorting);
+  }, [currentPage, sorting, query, urlType]);
   return (
     <div>
       <div className=" items-center py-4">

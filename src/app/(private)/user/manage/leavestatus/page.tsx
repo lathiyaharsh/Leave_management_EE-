@@ -8,7 +8,7 @@ import Loading from "@/Components/Loading";
 
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(false);
+  const [data, setData] = useState([]);
   useEffect(() => {
     const fetchLeaveData = async () => {
       setLoading(true);

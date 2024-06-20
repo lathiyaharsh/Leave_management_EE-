@@ -6,15 +6,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getApiCall } from "@/Utils/apiCall";
-import { toast } from "react-toastify";
-import FieldGroup from "@/Components/ui/form/useInputGroup";
 import Image from "next/image";
+import { User } from "@/Utils/types";
 
-export const getColumns = (setViewModel, setEditUserData, formik) => [
+export const getColumns = (setViewModel: (value: boolean) => void, setEditUserData: (userData: User) => void, formik: any) => [
   {
     accessorKey: "id",
     header: "User Id",
@@ -25,22 +22,22 @@ export const getColumns = (setViewModel, setEditUserData, formik) => [
   },
   {
     accessorKey: "email",
-    header: "email",
+    header: "Email",
   },
   {
     accessorKey: "gender",
-    header: "gender",
+    header: "Gender",
   },
   {
-    header: "image",
-    cell: ({ row }) => {
+    header: "Image",
+    cell: ({ row }: { row: { original: User } }) => {
       const image = row.original.image;
       return (
         <>
           <Image
             src={image}
             alt="User Avatar"
-            className="rounded "
+            className="rounded"
             width={50}
             height={50}
           />
@@ -50,12 +47,12 @@ export const getColumns = (setViewModel, setEditUserData, formik) => [
   },
   {
     accessorKey: "phone",
-    header: "phone",
+    header: "Phone",
   },
   {
     accessorKey: "createdAt",
     header: "Create Date",
-    cell: ({ row }) => {
+    cell: ({ row }: { row: { getValue: (key: string) => string } }) => {
       const timestamp = row.getValue("createdAt");
       const date = moment(timestamp);
       const formatted = date.format("YYYY-MM-DD");
@@ -64,25 +61,24 @@ export const getColumns = (setViewModel, setEditUserData, formik) => [
   },
   {
     accessorKey: "address",
-    header: "address",
+    header: "Address",
   },
   {
     accessorKey: "grNumber",
-    header: "grNumber",
+    header: "GR Number",
   },
   {
     accessorKey: "department",
-    header: "department",
+    header: "Department",
   },
   {
     accessorKey: "div",
-    header: "div",
+    header: "Div",
   },
-
   {
     header: "Action",
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row }: { row: { original: User } }) => {
       const userData = row.original;
       return (
         <>
@@ -95,7 +91,6 @@ export const getColumns = (setViewModel, setEditUserData, formik) => [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
               <>
                 <DropdownMenuItem
                   onClick={async () => {

@@ -1,15 +1,6 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-
-export type LeaveDetails = {
-  userId: number;
-  totalWorkingDays: number;
-  totalLeave: number;
-  availableLeave: number;
-  usedLeave: number;
-  user_name: string;
-  user_email: string;
-};
+import { LeaveDetails } from "@/Utils/types";
 
 export const columns: ColumnDef<LeaveDetails>[] = [
   {

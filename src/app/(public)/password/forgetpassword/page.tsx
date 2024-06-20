@@ -28,7 +28,7 @@ function ForgetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const apiCall = async (url, method) => {
+  const apiCall = async (url: string, method: string) => {
     try {
       if (method === "sendOtp") {
         const values = { email: formik?.values?.email };
@@ -60,6 +60,7 @@ function ForgetPassword() {
         }
         if (method === "resetPassword") {
           toast.success(result.data.message);
+          router.push("/login");
         }
       }
       if (result?.message) {
@@ -78,32 +79,8 @@ function ForgetPassword() {
     validationSchema: useModelValidation("forget_password"),
     onSubmit: async (values) => {
       try {
-        console.log(values);
-        setLoading(true);
-        const result = await postApiCall("/auth/login", values);
-
-        if (result?.status == 200) {
-          const findUser: any = await getApiCall("/user/profile");
-          if (findUser?.data?.profile) {
-            const loginUser = findUser?.data?.profile;
-            setUser(loginUser);
-            setSignUpLoading(false);
-            formik.resetForm();
-            router.push("/dashboard");
-            toast.success("Login successful");
-          } else {
-            toast.error("Try again");
-            return false;
-          }
-        } else {
-          toast.error(result.message);
-        }
       } catch (error: any) {
-        console.error(
-          "Login error:",
-          error.response ? error.response.data : error.message
-        );
-        toast.error("Login Failed");
+        toast.error("Reset  Failed");
       } finally {
         setLoading(false);
       }
@@ -123,7 +100,11 @@ function ForgetPassword() {
         <form onSubmit={formik.handleSubmit}>
           {showEmail && (
             <>
-              <FieldGroup fields={sendEmailInputs} formik={formik} />
+              <FieldGroup
+                fields={sendEmailInputs}
+                formik={formik}
+                options={""}
+              />
               {formik?.values.email && (
                 <>
                   <div className="flex items-center justify-center mt-5">
@@ -148,7 +129,7 @@ function ForgetPassword() {
                   maxLength={4}
                   value={otp}
                   onChange={(otp) => {
-                    formik.setValues((v) => {
+                    formik.setValues((v:any) => {
                       return { ...v, otp };
                     });
                   }}
@@ -187,7 +168,7 @@ function ForgetPassword() {
           )}
           {showPassword && (
             <>
-              <FieldGroup fields={resetPasswordInputs} formik={formik} />
+              <FieldGroup fields={resetPasswordInputs} formik={formik}  options={''} />
             </>
           )}
 
