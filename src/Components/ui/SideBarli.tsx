@@ -28,6 +28,8 @@ function SideBarLi({ user }) {
       title: "Dashboard",
       href: "/dashboard",
     },
+  ];
+  const bottomCommune: { title: string; href: string }[] = [
     {
       title: "Logout",
       href: "/logout",
@@ -37,7 +39,7 @@ function SideBarLi({ user }) {
   const guest: { title: string; href: string }[] = [
     {
       title: "Sign In",
-      href: "/Login",
+      href: "/login",
     },
     {
       title: "Sign Up",
@@ -59,8 +61,9 @@ function SideBarLi({ user }) {
     <>
       {userRole !== "Guest" ? (
         <>
-          <A links={{ linkDetails: components }} />
           <A links={{ linkDetails: loginCommune }} />
+          <A links={{ linkDetails: components }} />
+          <A links={{ linkDetails: bottomCommune }} />
         </>
       ) : (
         <>

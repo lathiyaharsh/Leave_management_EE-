@@ -19,7 +19,7 @@ import {
   otpInput,
   resetPassword,
 } from "@/Components/ui/form/fields";
-
+import Loading from "@/Components/Loading";
 function ForgetPassword() {
   const [loading, setLoading] = useState<boolean>(false);
   const [showEmail, setShowEmail] = useState(true);
@@ -192,9 +192,7 @@ function ForgetPassword() {
           )}
 
           {loading ? (
-            <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            </div>
+            <Loading />
           ) : (
             <>
               {showPassword && (

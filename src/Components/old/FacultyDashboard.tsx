@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from "react";
-import MonthCalendar from "./MonthCalendar";
-import { prepareLeaveData } from "./utils";
+import MonthCalendar from "../../app/(private)/dashboard/MonthCalendar";
+import { prepareLeaveData } from "../../app/(private)/dashboard/utils";
 import { getApiCall } from "@/Utils/apiCall";
+import Loading from "@/Components/Loading";
 function FacultyComponent() {
   const [leaveData, setLeaveData] = useState({});
   const [currentYear, setCurrentYear] = useState(2024);
@@ -51,9 +52,7 @@ function FacultyComponent() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="App">

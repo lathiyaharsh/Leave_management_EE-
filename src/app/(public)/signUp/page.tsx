@@ -7,6 +7,7 @@ import useInitialValues from "@/Components/ui/form/useInitialValues";
 import { postApiCallWithImage } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Loading from "@/Components/Loading";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import { signUp } from "@/Components/ui/form/fields";
 const SignUp = () => {
@@ -49,9 +50,7 @@ const SignUp = () => {
 
           
           {signUpLoading ? (
-            <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            </div>
+            <Loading />
           ) : (
             <div className="flex items-center justify-between">
               <button

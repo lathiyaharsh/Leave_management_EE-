@@ -6,6 +6,8 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import LeaveChart from "./LeaveChart";
 
+import Loading from "@/Components/Loading";
+import StudentFacultyComponent from "./StudentFacultyDashboard";
 function AdminComponent() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(false);
@@ -29,12 +31,13 @@ function AdminComponent() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="container mx-auto py-10">
+              <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+                Leave Report
+              </h1>
             <DataTable columns={columns} data={data} />
             <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
               <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
@@ -43,6 +46,8 @@ function AdminComponent() {
               <LeaveChart leaveData={data} />
             </div>
           </div>
+              
+          <StudentFacultyComponent />
         </>
       )}
     </>

@@ -11,8 +11,7 @@ import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import { getApiCall, putApiCall } from "@/Utils/apiCall";
 import { updateProfile } from "@/Components/ui/form/fields";
-import { UserFetcher } from "@/service/user";
-
+import Loading from "@/Components/Loading";
 function Profile() {
   const [loading, setLoading] = useState(false);
   const [viewModel, setViewModel] = useState(false);
@@ -162,9 +161,7 @@ function Profile() {
                           />
                         </div>
                         {loading ? (
-                          <div className="flex justify-center mt-4">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                          </div>
+                          <Loading />
                         ) : (
                           <div className="flex items-center justify-between">
                             <button

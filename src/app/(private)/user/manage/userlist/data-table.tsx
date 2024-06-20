@@ -10,6 +10,7 @@ import {
 import * as React from "react";
 import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
+import Loading from "@/Components/Loading";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -124,9 +125,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
       {loading ? (
-        <div className="flex justify-center items-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <div className="rounded-md border min-w-min">
           <table className="min-w-full divide-y divide-gray-200">

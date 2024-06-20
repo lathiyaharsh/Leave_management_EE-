@@ -29,7 +29,6 @@ export const UserFetcher = () => {
         const result = await fetchUser();
         setUser(result);
       } catch (error) {
-        router.push("/logout");
         console.error("Error fetching user Role:", error);
       }
     };

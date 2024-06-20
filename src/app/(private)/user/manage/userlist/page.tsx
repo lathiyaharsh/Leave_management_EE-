@@ -13,6 +13,7 @@ import useModelValidation from "@/Components/ui/form/formValidation";
 import { putApiCall } from "@/Utils/apiCall";
 import { editUser } from "@/Components/ui/form/fields";
 import { toast } from "react-toastify";
+import Loading from "@/Components/Loading";
 import { useUserContext } from "@/app/context/userContext";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
@@ -101,9 +102,7 @@ export default function DemoPage() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="p-5">
@@ -118,6 +117,7 @@ export default function DemoPage() {
               query={query}
               setGetSorting={setGetSorting}
               getSorting={getSorting}
+              url={'studentList'}
             />
             <ul className="flex items-center -space-x-px h-10 text-base justify-end">
               {/* Pagination controls */}
@@ -229,9 +229,7 @@ export default function DemoPage() {
                           />
                         </div>
                         {loading ? (
-                          <div className="flex justify-center mt-4">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                          </div>
+                          <Loading />
                         ) : (
                           <div className="flex items-center justify-between">
                             <button

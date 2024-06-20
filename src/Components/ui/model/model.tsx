@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import FieldGroup from '../form/useInputGroup';
 
+import Loading from "@/Components/Loading";
 function Model({fields,formik,modelName,btnName}) {
     const { viewModel, setViewModel } = useContext(ModelContext);
   return (
@@ -47,9 +48,7 @@ function Model({fields,formik,modelName,btnName}) {
                           
                         </div>
                         {loading ? (
-                          <div className="flex justify-center mt-4">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                          </div>
+                          <Loading />
                         ) : (
                           <div className="flex items-center justify-between">
                             <button

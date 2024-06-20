@@ -1,9 +1,6 @@
 "use client";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import moment from 'moment';
-import { Checkbox } from "@/components/ui/checkbox"
+
 export type LeaveDetails = {
   userId: number;
   totalWorkingDays: number;

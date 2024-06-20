@@ -12,6 +12,7 @@ import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import { login } from "@/Components/ui/form/fields";
+import Loading from "@/Components/Loading";
 function Login() {
   const [user, setUser] = useUserContext();
   const [signUpLoading, setSignUpLoading] = useState(false);
@@ -73,9 +74,7 @@ function Login() {
           Forget Password?
         </Link>
         {signUpLoading ? (
-          <div className="flex justify-center mt-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-          </div>
+          <Loading />
         ) : (
           <div className="flex items-center justify-between">
             <button

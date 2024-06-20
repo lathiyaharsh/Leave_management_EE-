@@ -13,6 +13,8 @@ import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+
+import Loading from "@/Components/Loading";
 import { setUsers } from "@/lib/redux/actions/userActions";
 import { useUserContext } from "@/app/context/userContext";
 function convertNegativeToZero(number) {
@@ -140,9 +142,7 @@ function Leave() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <div className="bg-gray-100 flex items-center justify-center p-3">
           <div className="bg-white py-40 px-6 flex justify-evenly rounded-lg shadow-lg w-full  gap-8">
@@ -268,9 +268,7 @@ function Leave() {
                           />
                           <div className="flex justify-start mb-3"></div>
                           {loading ? (
-                            <div className="flex justify-center mt-4">
-                              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                            </div>
+                            <Loading />
                           ) : (
                             <div className="flex items-center justify-between">
                               <button

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import nextArrow from "@/app/assets/images/fast-forward.png";
 import backArrow from "@/app/assets/images/fast-backward.png";
-
+import Loading from "@/Components/Loading";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -16,6 +16,7 @@ export default function DemoPage() {
   const [query, setQuery] = useState("");
   const [getSorting, setGetSorting] = useState("");
 
+  
   const fetchLeaveData = async () => {
     setLoading(true);
     try {
@@ -43,9 +44,7 @@ export default function DemoPage() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="p-5">

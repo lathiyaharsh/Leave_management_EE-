@@ -2,8 +2,8 @@
 import { useUserContext } from "@/app/context/userContext";
 import React from "react";
 import AdminComponent from "./AdminDashboard";
-import FacultyComponent from "./FacultyDashboard";
-import StudentComponent from "./StudentDashboard";
+import FacultyComponent from "../../../Components/old/FacultyDashboard";
+import StudentFacultyComponent from "./StudentFacultyDashboard";
 function Dashboard() {
   const [user] = useUserContext();
 
@@ -23,9 +23,9 @@ function Dashboard() {
     case "admin":
       return <AdminComponent />;
     case "faculty":
-      return <FacultyComponent />;
+      return <StudentFacultyComponent />;
     case "student":
-      return <StudentComponent />;
+      return <StudentFacultyComponent />;
     default:
       return <p>Access denied</p>;
   }

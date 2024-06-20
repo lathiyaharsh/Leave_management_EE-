@@ -3,7 +3,7 @@ import { getApiCall } from "@/Utils/apiCall";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { useState, useEffect } from "react";
-
+import Loading from "@/Components/Loading";
 
 
 export default function DemoPage() {
@@ -29,9 +29,7 @@ export default function DemoPage() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <div className="container mx-auto py-10">
           <DataTable columns={columns} data={data} />

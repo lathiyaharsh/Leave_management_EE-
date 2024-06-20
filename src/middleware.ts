@@ -9,7 +9,7 @@ const protectedRoutes: Record<string, string[]> = {
 };
 const commonRoutes = ["/dashboard", "/profile","/logout"]; //protected
 const authRoutes = ["/login", "/register"];
-const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword", ];
+const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword","/logout" ];
 
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("jwt")?.value;

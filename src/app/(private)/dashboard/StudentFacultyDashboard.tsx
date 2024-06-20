@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
 import { prepareLeaveData } from "./utils";
 import { getApiCall } from "@/Utils/apiCall";
+import Loading from "@/Components/Loading";
+import { useUserContext } from "@/app/context/userContext";
 
-function StudentComponent() {
+function StudentFacultyComponent() {
   const [leaveData, setLeaveData] = useState({});
   const [currentYear, setCurrentYear] = useState(2024);
   const [currentMonth, setCurrentMonth] = useState(5); // June (zero-based index)
   const [loading, setLoading] = useState(true);
+  const [user] = useUserContext();
   useEffect(() => {
     fetchLeaveData(currentYear, currentMonth);
   }, [currentYear, currentMonth]);
@@ -15,9 +18,11 @@ function StudentComponent() {
   const fetchLeaveData = async (year, month) => {
     setLoading(true);
     try {
-      const response = await getApiCall(
-        `/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`
-      );
+      let url =`/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`
+      if(user.user == 'faculty' || user.user == 'admin') {
+        url = `/leave/leaveStatus?year=${year}&month=${month}&limit=1000`
+      }
+      const response = await getApiCall(url);
       if (response.data.leaveStatus) {
         const processedLeaveData = prepareLeaveData(response.data.leaveStatus);
         setLeaveData(processedLeaveData);
@@ -51,9 +56,7 @@ function StudentComponent() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="App">
@@ -72,4 +75,4 @@ function StudentComponent() {
   );
 }
 
-export default StudentComponent;
+export default StudentFacultyComponent;
