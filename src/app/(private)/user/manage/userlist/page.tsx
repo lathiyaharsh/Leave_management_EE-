@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Loading from "@/Components/Loading";
 import { useUserContext } from "@/app/context/userContext";
 import { SortType, User } from "@/Utils/types";
+import Loading2 from "@/Components/Loading2";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -235,7 +236,7 @@ export default function DemoPage() {
                           )}
                         </div>
                         {loading ? (
-                          <Loading />
+                          <Loading2 />
                         ) : (
                           <div className="flex items-center justify-between">
                             <button

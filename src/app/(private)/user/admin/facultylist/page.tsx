@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Loading from "@/Components/Loading";
 import { useUserContext } from "@/app/context/userContext";
 import { SortType, User } from "@/Utils/types";
+import Loading2 from "@/Components/Loading2";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -239,7 +240,7 @@ export default function DemoPage() {
                           )}
                         </div>
                         {loading ? (
-                          <Loading />
+                          <Loading2 />
                         ) : (
                           <div className="flex items-center justify-between">
                             <button
@@ -256,10 +257,15 @@ export default function DemoPage() {
                               type="button"
                               className="mt-7 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                               onClick={() => {
-                                deleteUser(
-                                  `/user/removeUser/${editUserData?.id}`
+                                let sure = confirm(
+                                  "Are you sure you want to Delete User?"
                                 );
-                                setViewModel(false);
+                                if (sure) {
+                                  deleteUser(
+                                    `/user/removeUser/${editUserData?.id}`
+                                  );
+                                  setViewModel(false);
+                                }
                               }}
                             >
                               Delete User

@@ -6,7 +6,6 @@ import { columns } from "./columns";
 import { LeaveDetails } from "@/Utils/types";
 import { DataTable } from "./data-table";
 import LeaveChart from "./LeaveChart";
-
 import Loading from "@/Components/Loading";
 import StudentFacultyComponent from "./StudentFacultyDashboard";
 

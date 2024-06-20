@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { useFormik } from "formik";
-
 import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import { postApiCallWithImage } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
-import Loading from "@/Components/Loading";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import { addUser } from "@/Components/ui/form/fields";
 import { useUserContext } from "@/app/context/userContext";
+import Loading2 from "@/Components/Loading2";
 const SignUp = () => {
   const router = useRouter();
   const [user] = useUserContext();
@@ -62,7 +60,7 @@ const SignUp = () => {
           <FieldGroup fields={fields} formik={formik} options={options} />
 
           {signUpLoading ? (
-            <Loading />
+            <Loading2 />
           ) : (
             <div className="flex items-center justify-between">
               <button

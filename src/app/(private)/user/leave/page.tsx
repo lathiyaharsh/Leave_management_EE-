@@ -17,7 +17,8 @@ import { useFormik } from "formik";
 import Loading from "@/Components/Loading";
 import { setUsers } from "@/lib/redux/actions/userActions";
 import { useUserContext } from "@/app/context/userContext";
-function convertNegativeToZero(number) {
+import Loading2 from "@/Components/Loading2";
+function convertNegativeToZero(number : number) {
   if (number < 0) {
     return 0;
   } else {
@@ -268,7 +269,7 @@ function Leave() {
                           />
                           <div className="flex justify-start mb-3"></div>
                           {loading ? (
-                            <Loading />
+                            <Loading2 />
                           ) : (
                             <div className="flex items-center justify-between">
                               <button

@@ -10,7 +10,9 @@ interface MonthCalendarProps {
   onNextMonth: () => void;
   onYearChange: (year: number) => void;
 }
+
 type LeaveTypes = keyof typeof leaveTypes;
+
 const MonthCalendar: React.FC<MonthCalendarProps> = ({
   year,
   month,
@@ -75,57 +77,63 @@ const MonthCalendar: React.FC<MonthCalendarProps> = ({
     return days;
   };
 
+  const monthName = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    new Date(Date.UTC(year, month, 1))
+  );
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Leave Calendar
+        Leave Calendar {monthName} {year}
       </h1>
-      <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg">
-        <button
-          className="pagination-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-          onClick={onPrevMonth}
-        >
-          Previous
-        </button>
-        <select
-          className="year-selector bg-white border border-gray-300 rounded py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={year}
-          onChange={(e) => onYearChange(parseInt(e.target.value, 10))}
-        >
-          {Array.from({ length: 10 }, (_, index) => {
-            const yearOption = 2024 + index;
-            return (
-              <option key={yearOption} value={yearOption}>
-                {yearOption}
-              </option>
-            );
-          })}
-        </select>
-        <button
-          className="pagination-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-          onClick={onNextMonth}
-        >
-          Next
-        </button>
-      </div>
+      <div className="flex justify-between items-center space-x-4 p-4 bg-gray-100 rounded-lg">
+        <div>
+          <button
+            className="pagination-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+            onClick={onPrevMonth}
+          >
+            Previous
+          </button>
+          <select
+            className="year-selector bg-white border border-gray-300 rounded py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={year}
+            onChange={(e) => onYearChange(parseInt(e.target.value, 10))}
+          >
+            {Array.from({ length: 10 }, (_, index) => {
+              const yearOption = 2024 + index;
+              return (
+                <option key={yearOption} value={yearOption}>
+                  {yearOption}
+                </option>
+              );
+            })}
+          </select>
+          <button
+            className="pagination-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+            onClick={onNextMonth}
+          >
+            Next
+          </button>
+        </div>
 
+        <div className="legend">
+          <div className="legend-item">
+            <div className="legend-color bg-green-500"></div>
+            <span>Approved</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color bg-yellow-500"></div>
+            <span>Pending</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color bg-red-500"></div>
+            <span>Rejected</span>
+          </div>
+        </div>
+      </div>
       <div className="calendar">
         {renderDayHeaders()}
         {renderDays()}
-      </div>
-      <div className="legend">
-        <div className="legend-item">
-          <div className="legend-color bg-green-500"></div>
-          <span>Approved</span>
-        </div>
-        <div className="legend-item">
-          <div className="legend-color bg-yellow-500"></div>
-          <span>Pending</span>
-        </div>
-        <div className="legend-item">
-          <div className="legend-color bg-red-500"></div>
-          <span>Rejected</span>
-        </div>
       </div>
     </div>
   );
