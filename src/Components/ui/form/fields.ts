@@ -1,11 +1,21 @@
 // Common form field definitions
 const formFields = {
   name: { id: "name", name: "name", title: "Name", type: "text" },
-  department: { id: "department", name: "department", title: "Department", type: "text" },
+  department: {
+    id: "department",
+    name: "department",
+    title: "Department",
+    type: "text",
+  },
   div: { id: "div", name: "div", title: "Div", type: "text" },
   email: { id: "email", name: "email", title: "Email", type: "email" },
   phone: { id: "phone", name: "phone", title: "Phone Number", type: "number" },
-  grNumber: { id: "grNumber", name: "grNumber", title: "Gr Number ", type: "number" },
+  grNumber: {
+    id: "grNumber",
+    name: "grNumber",
+    title: "Gr Number ",
+    type: "number",
+  },
   otp: { id: "otp", name: "otp", title: "Otp", type: "number" },
   address: {
     id: "address",
@@ -68,9 +78,11 @@ const formFields = {
     name: "role",
     title: "role",
     type: "select",
-    options: [{ label: "Student", value: "4" },{ label: "Faculty", value: "3" }],
+    options: [
+      { label: "Student", value: "4" },
+      { label: "Faculty", value: "3" },
+    ],
   },
-  
 };
 
 // Specific form configurations using the common form fields
@@ -112,10 +124,7 @@ export const signUp = [
   formFields.password,
   formFields.confirmPassword,
 ];
-export const login = [
-  formFields.email,
-  formFields.password,
-];
+export const login = [formFields.email, formFields.password];
 export const addUser = [
   formFields.name,
   formFields.email,
@@ -127,13 +136,6 @@ export const addUser = [
   formFields.confirmPassword,
   formFields.role,
 ];
-export const sendEmail = [
-  formFields.email,
-];
-export const otpInput = [
-  formFields.otp,
-];
-export const resetPassword = [
-  formFields.password,
-  formFields.confirmPassword,
-];
+export const sendEmail = [formFields.email];
+export const otpInput = [formFields.otp];
+export const resetPassword = [formFields.password, formFields.confirmPassword];

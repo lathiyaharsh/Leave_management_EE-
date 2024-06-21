@@ -55,6 +55,7 @@ export interface User {
   address: string;
   div: string | null;
   createdAt: string;
+  user?:string;
 }
 
 export type SortType = {

@@ -92,8 +92,6 @@ export const getColumns = (setReloadData: (value: any) => void): TableColumn[] =
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-             
-              
             </DropdownMenuContent>
           </DropdownMenu>
         </>

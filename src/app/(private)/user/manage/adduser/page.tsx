@@ -5,13 +5,11 @@ import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import { postApiCallWithImage } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import { addUser } from "@/Components/ui/form/fields";
 import { useUserContext } from "@/app/context/userContext";
 import Loading2 from "@/Components/Loading2";
 const SignUp = () => {
-  const router = useRouter();
   const [user] = useUserContext();
   const [signUpLoading, setSignUpLoading] = useState(false);
   const formik = useFormik({
@@ -31,7 +29,7 @@ const SignUp = () => {
       } catch (error) {
         toast.error("Add User failed");
       } finally {
-        setSignUpLoading(false); // Reset loading state after form submission
+        setSignUpLoading(false); 
       }
     },
   });

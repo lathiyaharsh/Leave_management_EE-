@@ -1,4 +1,4 @@
-import {  MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import moment from "moment";
 import {
@@ -6,13 +6,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getApiCall } from "@/Utils/apiCall";
 import { toast } from "react-toastify";
 import { LeaveStatus } from "@/Utils/types";
-
 
 export const getColumns = (setReloadData: (value: any) => void) => [
   {
@@ -77,7 +75,7 @@ export const getColumns = (setReloadData: (value: any) => void) => [
   {
     header: "Action",
     id: "actions",
-    cell: ({ row }:{ row: { original: LeaveStatus } }) => {
+    cell: ({ row }: { row: { original: LeaveStatus } }) => {
       const leave = row.original;
       const updateLeaveData = async (url: string) => {
         try {
@@ -85,8 +83,8 @@ export const getColumns = (setReloadData: (value: any) => void) => [
           const result = await getApiCall(url);
           if (result?.status == 200) {
             toast.success(result.data.message);
-            setReloadData((prev:boolean) => !prev); // Trigger a data refresh
-          }else {
+            setReloadData((prev: boolean) => !prev); // Trigger a data refresh
+          } else {
             toast.error(result.message);
           }
         } catch (error) {
@@ -109,9 +107,7 @@ export const getColumns = (setReloadData: (value: any) => void) => [
                 <>
                   <DropdownMenuItem
                     onClick={async () => {
-                      await updateLeaveData(
-                        `/leave/leaveApproval/${leave.id}`
-                      );
+                      await updateLeaveData(`/leave/leaveApproval/${leave.id}`);
                     }}
                   >
                     Approve

@@ -31,13 +31,10 @@ const SignUp = () => {
       } catch (error) {
         toast.error("SignUp failed");
       }finally {
-        setSignUpLoading(false); // Reset loading state after form submission
+        setSignUpLoading(false); 
       }
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
-
   const fields = signUp;
   return (
     <div className="p-8  bg-gray-100 min-h-screen flex items-center justify-center ">

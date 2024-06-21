@@ -1,12 +1,10 @@
 "use client";
 import { getApiCall } from "@/Utils/apiCall";
-import { getColumns } from "../../manage/userlist/columns"; 
+import { getColumns } from "../../manage/userlist/columns";
 import { DataTable } from "@/Components/DataTable/data-table";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import nextArrow from "@/app/assets/images/fast-forward.png";
-import backArrow from "@/app/assets/images/fast-backward.png";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
@@ -18,6 +16,7 @@ import { useUserContext } from "@/app/context/userContext";
 import { SortType, User } from "@/Utils/types";
 import Loading2 from "@/Components/Loading2";
 import ModelTop from "@/Components/ui/model/model";
+import Pagination from "@/Components/DataTable/Pagination";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -102,9 +101,6 @@ export default function DemoPage() {
     },
   });
   const fields = editUser;
-
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
   return (
     <>
       {loading ? (
@@ -125,68 +121,21 @@ export default function DemoPage() {
               getSorting={getSorting}
               urlType={"facultyList"}
             />
-            <ul className="flex items-center -space-x-px h-10 text-base justify-end">
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage((p) => (p > 1 ? p - 1 : p));
-                  }}
-                  className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover dark:hover"
-                >
-                  <span className="sr-only">Previous</span>
-                  <Image src={backArrow} alt="Back" width={32} height={32} />
-                </a>
-              </li>
-
-              {Array.from(
-                {
-                  length:
-                    Math.min(maxPage, currentPage + 2) -
-                    Math.max(1, currentPage - 2) +
-                    1,
-                },
-                (_, index) => Math.max(1, currentPage - 2) + index
-              ).map((page) => (
-                <li key={page}>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage(page);
-                    }}
-                    className={`flex items-center justify-center px-4 h-10 leading-tight ${
-                      currentPage === page
-                        ? "text-blue-600 bg-blue-50 border-blue-300"
-                        : "text-gray-500 bg-white border-gray-300"
-                    } hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white`}
-                  >
-                    {page}
-                  </a>
-                </li>
-              ))}
-
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage((p) => (p < maxPage ? p + 1 : p));
-                  }}
-                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  <span className="sr-only">Next</span>
-                  <Image src={nextArrow} alt="Next" width={32} height={32} />
-                </a>
-              </li>
-            </ul>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              maxPage={maxPage}
+            />
           </div>
           {viewModel && (
             <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-blur-sm">
               <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <ModelTop setViewModel={setViewModel} formik={formik} ModelName={`Edit Faculty ${editUserData?.id} : ${editUserData?.name}`} />
+                  <ModelTop
+                    setViewModel={setViewModel}
+                    formik={formik}
+                    ModelName={`Edit Faculty ${editUserData?.id} : ${editUserData?.name}`}
+                  />
                   <div className=" bg-gray-100  flex items-center justify-center ">
                     <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8  w-full">
                       <form onSubmit={formik.handleSubmit}>

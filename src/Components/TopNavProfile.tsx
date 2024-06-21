@@ -2,25 +2,18 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import A from "./ui/a";
+import { User } from "@/Utils/types";
 
-
-
-function TopNavProfile({ user }) {
+function TopNavProfile({ user }:{ user :{user:User}}) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 
   const userRole = user?.user?.user || "Guest";
   const userName = user?.user?.name;
-  const student: { title: string; href: string }[] = [
-   
-  ];
-  
-  const faculty: { title: string; href: string }[] = [
-   
-  ];
-  const admin: { title: string; href: string }[] = [
-   
-  ];
+  const student: { title: string; href: string }[] = [];
+
+  const faculty: { title: string; href: string }[] = [];
+  const admin: { title: string; href: string }[] = [];
   const guest: { title: string; href: string }[] = [
     {
       title: "Sign in",
@@ -65,11 +58,11 @@ function TopNavProfile({ user }) {
       ? guest
       : userRole === "student"
         ? student
-          : userRole === "faculty"
-            ? faculty
-            : userRole === "admin"
-              ? admin
-              : null;
+        : userRole === "faculty"
+          ? faculty
+          : userRole === "admin"
+            ? admin
+            : null;
   return (
     <>
       <A links={{ linkDetails: communeForAll }} />

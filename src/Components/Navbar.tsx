@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-
 import { useUserContext } from "@/app/context/userContext";
 import SideBarUl from "@/Components/Sidebar";
 import TopNavProfile from "./TopNavProfile";
@@ -12,19 +11,11 @@ const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [user] = useUserContext();
-
-  const sidebarRef = useRef(null);
-  const topNavRef = useRef(null);
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  
 
   return (
     <>
-      <nav
-        className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-      >
+      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -36,11 +27,11 @@ const NavBar = () => {
               >
                 <span className="sr-only">Open sidebar</span>
                 <Image
-                src={menuIcon}
-                alt="Profile Picture"
-                width={40}
-                height={40}
-              />
+                  src={menuIcon}
+                  alt="Profile Picture"
+                  width={40}
+                  height={40}
+                />
               </button>
               <a href="/" className="flex ms-2 md:me-24">
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">

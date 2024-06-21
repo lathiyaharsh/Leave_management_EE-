@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "adduser",
         "chartjs",
+        "facultylist",
         "Feculty",
         "fontawesome",
         "forgetpassword",
@@ -8,8 +10,10 @@
         "fortawesome",
         "LEAVEBALANCE",
         "leavestatus",
+        "manageleave",
         "tanstack",
         "toastify",
-        "UPDATELEAVEBALANCE"
+        "UPDATELEAVEBALANCE",
+        "userlist"
     ]
 }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import FieldGroup from "../form/useInputGroup";
 
 import Loading from "@/Components/Loading";
-function ModelTop({setViewModel,formik,ModelName}) {
+function ModelTop({setViewModel,formik,ModelName}:{setViewModel:(value: any) => void,formik:any,ModelName:string}) {
   return (
     <>
       <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">

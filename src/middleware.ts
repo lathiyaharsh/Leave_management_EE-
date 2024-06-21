@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
 
-// Define the protected non-API routes
 const protectedRoutes: Record<string, string[]> = {
   student: ["/user/leave"],
   faculty: ["/dashboard","/lms/faculty","/user/manage"],

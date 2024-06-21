@@ -1,8 +1,30 @@
 import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+export interface Option {
+  value: string;
+  label: string;
+}
+export type FieldProps = {
+  id: string;
+  name: string;
+  title: string;
+  type: string; 
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  value: string;
+  options?: Option[] | any;
+  setFieldValue?:any;
+  error?: string;
+};
 
-function TextInput({ field, touched, error }) {
+
+export type TextInputProps = {
+  field: FieldProps;
+  touched?: boolean;
+  error?: string | undefined;
+  options?: Option[] | any;
+  
+};
+const TextInput: React.FC<TextInputProps> =({ field, touched, error }) =>{
   const { id, name, title, type, onChange, onBlur, value } = field;
 
   return (
@@ -32,7 +54,7 @@ function TextInput({ field, touched, error }) {
   );
 }
 
-function TextArea({ field, touched, error }) {
+const TextArea: React.FC<TextInputProps> =({ field, touched, error }) =>{
   const { id, name, title, onChange, onBlur, value } = field;
 
   return (
@@ -61,7 +83,7 @@ function TextArea({ field, touched, error }) {
   );
 }
 
-const RadioButtonGroup = ({ field, touched, error }) => {
+const RadioButtonGroup: React.FC<TextInputProps> =({ field, touched, error }) =>{
   const { id, name, title, options, onChange, onBlur, value } = field;
 
   return (
@@ -69,7 +91,7 @@ const RadioButtonGroup = ({ field, touched, error }) => {
       <label className="block text-gray-700 text-sm font-bold mb-2">
         {title}
       </label>
-      {options.map((option) => (
+      {options.map((option:Option) => (
         <label key={option.value} className="inline-flex items-center mr-4">
           <input
             type="radio"
@@ -91,11 +113,11 @@ const RadioButtonGroup = ({ field, touched, error }) => {
   );
 };
 
-const ImageInput = ({ field, touched, error }) => {
+const ImageInput: React.FC<TextInputProps> =({ field, touched, error }) =>{
   const { id, name, title, onChange, onBlur } = field;
 
-  const handleChange = (event) => {
-    onChange(event); // call formik's onChange
+  const handleChange = (event:any) => {
+    onChange(event); 
     if (event.currentTarget.files) {
       const file = event.currentTarget.files[0];
       field.setFieldValue(name, file);
@@ -125,13 +147,12 @@ const ImageInput = ({ field, touched, error }) => {
     </div>
   );
 };
-const DateInput = ({ field, touched, error }) => {
+const DateInput: React.FC<TextInputProps> =({ field, touched, error }) =>{
   const { id, name, title, onChange, onBlur, value } = field;
 
-  // Calculate the next day in YYYY-MM-DD format
   const today = new Date();
   today.setDate(today.getDate());
-  const nextDay = today.toISOString().split("T")[0]; // Get YYYY-MM-DD format
+  const nextDay = today.toISOString().split("T")[0]; 
 
   return (
     <div className="mb-4">
@@ -158,7 +179,7 @@ const DateInput = ({ field, touched, error }) => {
   );
 };
 
-const SelectInput = ({ field, touched, error , options}) => {
+const SelectInput: React.FC<TextInputProps>  = ({ field, touched, error , options}) => {
   const { id, name, title, onChange, onBlur, value } = field;
 
   return (
@@ -178,7 +199,7 @@ const SelectInput = ({ field, touched, error , options}) => {
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
         <option value="">Select {title}</option>
-        {options.map((option) => (
+        {options.map((option:Option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
@@ -191,7 +212,7 @@ const SelectInput = ({ field, touched, error , options}) => {
   );
 };
 
-const SelectInputNormal = ({ field, touched, error  }) => {
+const SelectInputNormal: React.FC<TextInputProps>  = ({ field, touched, error  }) => {
   const { id, name, title, onChange, onBlur, value , options} = field;
 
   return (
@@ -211,7 +232,7 @@ const SelectInputNormal = ({ field, touched, error  }) => {
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
         <option value="">Select {title}</option>
-        {options.map((option) => (
+        {options.map((option:Option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

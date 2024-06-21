@@ -4,11 +4,9 @@ import { getColumns } from "./columns"; // Import the function
 import React from "react";
 import { DataTable } from "@/Components/DataTable/data-table";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import nextArrow from "@/app/assets/images/fast-forward.png";
-import backArrow from "@/app/assets/images/fast-backward.png";
 import Loading from "@/Components/Loading";
 import { SortType, User } from "@/Utils/types";
+import Pagination from "@/Components/DataTable/Pagination";
 export default function DemoPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -61,65 +59,11 @@ export default function DemoPage() {
               getSorting={getSorting}
               urlType={"leaveStatus"}
             />
-            <ul className="flex items-center -space-x-px h-10 text-base justify-end">
-              {/* Pagination controls */}
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage((p) => (p > 1 ? p - 1 : p));
-                  }}
-                  className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover dark:hover"
-                >
-                  <span className="sr-only">Previous</span>
-                  <Image src={backArrow} alt="Back" width={32} height={32} />
-                </a>
-              </li>
-
-              {/* Pagination numbers */}
-              {Array.from(
-                {
-                  length:
-                    Math.min(maxPage, currentPage + 2) -
-                    Math.max(1, currentPage - 2) +
-                    1,
-                },
-                (_, index) => Math.max(1, currentPage - 2) + index
-              ).map((page) => (
-                <li key={page}>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage(page);
-                    }}
-                    className={`flex items-center justify-center px-4 h-10 leading-tight ${
-                      currentPage === page
-                        ? "text-blue-600 bg-blue-50 border-blue-300"
-                        : "text-gray-500 bg-white border-gray-300"
-                    } hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white`}
-                  >
-                    {page}
-                  </a>
-                </li>
-              ))}
-
-              {/* Next page button */}
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage((p) => (p < maxPage ? p + 1 : p));
-                  }}
-                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  <span className="sr-only">Next</span>
-                  <Image src={nextArrow} alt="Next" width={32} height={32} />
-                </a>
-              </li>
-            </ul>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              maxPage={maxPage}
+            />
           </div>
         </>
       )}

@@ -1,3 +1,4 @@
+import { User } from "@/Utils/types";
 import Link from "next/link";
 import React from "react";
 
@@ -41,7 +42,7 @@ const admin: { title: string; href: string }[] = [
   },
 ];
 
-function SideBarUl({ role }) {
+function SideBarUl({ role }:{role:{user:User}}) {
   const user = role.user.user;
   const components =
     user === "student"
@@ -50,7 +51,7 @@ function SideBarUl({ role }) {
         ? faculty
         : user === "admin"
           ? admin
-          : null;
+          : student;
   return (
     <>
       <ul id="dropdown-example" className="py-2 space-y-2">

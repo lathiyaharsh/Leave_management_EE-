@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InfoCard = ({ title, value }) => {
+const InfoCard = ({ title, value }:{title:string , value:string | number}) => {
   return (
     <div className="mb-4">
       <p className="text-lg font-medium text-gray-800">{title}</p>

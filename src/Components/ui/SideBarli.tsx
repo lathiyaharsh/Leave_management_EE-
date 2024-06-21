@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import A from "./a";
+import { User } from "@/Utils/types";
 
-function SideBarLi({ user }) {
+function SideBarLi({ user }: { user: { user: User } }) {
   const userRole = user?.user?.user || "Guest";
   const userName = user?.user?.name;
 
@@ -13,12 +14,8 @@ function SideBarLi({ user }) {
     },
   ];
 
-  const faculty: { title: string; href: string }[] = [
-   
-  ];
-  const admin: { title: string; href: string }[] = [
-    
-  ];
+  const faculty: { title: string; href: string }[] = [];
+  const admin: { title: string; href: string }[] = [];
   const loginCommune: { title: string; href: string }[] = [
     {
       title: userName || "Profile",

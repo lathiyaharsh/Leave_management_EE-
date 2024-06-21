@@ -1,5 +1,4 @@
 "use client";
-import { useRoleContext } from "@/app/context/userRole";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
@@ -53,8 +52,7 @@ function Login() {
       }
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
+  const { handleSubmit } = formik;
   const fields = login;
 
   return (
@@ -83,12 +81,12 @@ function Login() {
             >
               Log In
             </button>
-            
+
             <Link
               href="http://localhost:8007/api/v1/auth/google"
               className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-               Continue With Google
+              Continue With Google
             </Link>
           </div>
         )}

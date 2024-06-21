@@ -13,7 +13,6 @@ import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-
 import Loading from "@/Components/Loading";
 import { setUsers } from "@/lib/redux/actions/userActions";
 import { useUserContext } from "@/app/context/userContext";
@@ -102,7 +101,6 @@ function Leave() {
   const options = {
     requestToId: [] as { label: string; value: string }[],
   };
-
   if (Array.isArray(facultyList?.userList)) {
     for (let i = 0; i < facultyList?.userList.length; i++) {
       options.requestToId.push({
@@ -111,10 +109,6 @@ function Leave() {
       });
     }
   }
-
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
-
   const pieData = {
     labels: ["Attendance", "Used Leave"],
     datasets: [
@@ -155,7 +149,6 @@ function Leave() {
               </h2>
               <Pie data={pieData} className="max-w-xs" />
             </div>
-
             <div className="text-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Leave Balance
