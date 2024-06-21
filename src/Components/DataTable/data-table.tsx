@@ -50,7 +50,7 @@ export function DataTable<T>({
     try {
       if (urlType == "studentList") {
         const sortParams = sorting.map(
-          (sort : SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort : SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
 
         const result = await getApiCall(
@@ -64,7 +64,7 @@ export function DataTable<T>({
       }
       if (urlType == "manageLeave") {
         const sortParams = sorting.map(
-          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/leave/leaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
@@ -76,7 +76,7 @@ export function DataTable<T>({
       }
       if (urlType == "leaveStatus") {
         const sortParams = sorting.map(
-          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/leave/userLeaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
@@ -89,7 +89,7 @@ export function DataTable<T>({
       }
       if (urlType == "facultyList") {
         const sortParams = sorting.map(
-          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
           `/user/facultyList?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`

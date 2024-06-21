@@ -19,7 +19,7 @@ export const getColumns = (setReloadData: (value: any) => void) => [
   },
   {
     accessorKey: "requestedBy.name",
-    header: "Requested By",
+    header: "Requested By name",
   },
   {
     accessorKey: "requestedBy.id",

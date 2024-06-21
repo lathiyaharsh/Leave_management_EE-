@@ -56,7 +56,7 @@ export default function DemoPage() {
         const searchQuery: string = `search=${encodeURIComponent(query)}`;
         const sorting: any = getSorting;
         const sortParams: string[] = sorting.map(
-          (sort: SortType) => `${sort.id}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const url = `/user/studentList?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
         const result = await getApiCall(url);
