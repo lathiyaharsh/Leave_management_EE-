@@ -21,10 +21,10 @@ export const getColumns = (setReloadData: (value: any) => void) => [
     accessorKey: "requestedBy.name",
     header: "Requested By name",
   },
-  {
-    accessorKey: "requestedBy.id",
-    header: "Requested By ID",
-  },
+  // {
+  //   accessorKey: "requestedBy.id",
+  //   header: "Requested By ID",
+  // },
   {
     accessorKey: "startDate",
     header: "Start Date",
@@ -63,10 +63,10 @@ export const getColumns = (setReloadData: (value: any) => void) => [
     accessorKey: "userLeave.availableLeave",
     header: "Available Leave",
   },
-  {
-    accessorKey: "requestedTo.email",
-    header: "Requested To email",
-  },
+  // {
+  //   accessorKey: "requestedTo.email",
+  //   header: "Requested To email",
+  // },
   {
     accessorKey: "requestedTo.name",
     header: "Requested To name",

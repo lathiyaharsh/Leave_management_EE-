@@ -135,7 +135,7 @@ export function DataTable<T>({
     fetchFilteredData(query, sorting);
   }, [currentPage, sorting, query, urlType]);
   return (
-    <div>
+    <div className="">
       <div className=" items-center py-4">
         <Input
           placeholder="Filter Name..."

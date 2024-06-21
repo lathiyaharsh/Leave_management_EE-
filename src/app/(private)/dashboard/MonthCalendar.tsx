@@ -83,7 +83,7 @@ const MonthCalendar: React.FC<MonthCalendarProps> = ({
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-3xl font-bold mb-5 text-center text-gray-800">
         Leave Calendar {monthName} {year}
       </h1>
       <div className="flex justify-between items-center space-x-4 p-4 bg-gray-100 rounded-lg">

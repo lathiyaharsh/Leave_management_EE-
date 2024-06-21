@@ -61,7 +61,7 @@ function StudentFacultyComponent() {
         <Loading />
       ) : (
         <>
-          <div className="App">
+          <div className="App mt-20">
             <MonthCalendar
               year={currentYear}
               month={currentMonth}

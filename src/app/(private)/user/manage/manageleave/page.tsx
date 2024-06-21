@@ -44,7 +44,7 @@ export default function DemoPage() {
         <Loading />
       ) : (
         <>
-          <div className="p-5">
+          <div className="p-4">
             <DataTable
               columns={getColumns(setReloadData)}
               data={data}

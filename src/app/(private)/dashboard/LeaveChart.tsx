@@ -81,7 +81,7 @@ const LeavePieChart = ({ leaveData }: LeavePieChartProps) => {
   };
 
   return (
-    <div className="relative w-full" style={{ height: "500px" }}>
+    <div className="relative w-full flex justify-center" style={{ height: "500px" }}>
       <Pie data={chartData} options={options} />
     </div>
   );

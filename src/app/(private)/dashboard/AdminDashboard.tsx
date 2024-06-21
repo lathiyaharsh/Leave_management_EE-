@@ -35,20 +35,24 @@ function AdminComponent() {
         <Loading />
       ) : (
         <>
-          <div className="container mx-auto py-10">
+        <StudentFacultyComponent />
+          <div className="container mx-auto   py-10">
             <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
               Leave Report
             </h1>
             <DataTable columns={columns} data={data} />
-            <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
+            <div className="container  mx-auto p-6 bg-gray-100 min-h-screen">
               <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
                 Leave Report
               </h1>
+              <div className="flex justify-center">
+
               <LeaveChart leaveData={data} />
+              </div>
             </div>
           </div>
 
-          <StudentFacultyComponent />
+          
         </>
       )}
     </>
