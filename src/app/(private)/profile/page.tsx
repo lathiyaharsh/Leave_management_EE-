@@ -10,6 +10,8 @@ import useModelValidation from "@/Components/ui/form/formValidation";
 import { getApiCall, putApiCall } from "@/Utils/apiCall";
 import { updateProfile } from "@/Components/ui/form/fields";
 import Loading from "@/Components/Loading";
+import ModelTop from "@/Components/ui/model/model";
+import InfoItem from "@/Components/profile";
 function Profile() {
   const [loading, setLoading] = useState(false);
   const [viewModel, setViewModel] = useState(false);
@@ -40,7 +42,7 @@ function Profile() {
             const userData = await getApiCall("/user/profile");
             setUser(userData.data.profile);
           } else {
-            setUser((v:any) => {
+            setUser((v: any) => {
               return { ...v, ...values };
             });
           }
@@ -141,57 +143,18 @@ function Profile() {
                         {user.name}
                       </h3>
                       <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                        <i className="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>
+                        <i className="mr-2 text-lg text-blueGray-400"></i>
                         {email}
                       </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-building mr-2 text-lg text-blueGray-400"></i>
-                        Div: {div ? div : "Not assigned"}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-id-card mr-2 text-lg text-blueGray-400"></i>
-                        rNumber: {grNumber ? grNumber : "Not assigned"}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                        Address: {address}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
-                        Phone: {phone}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-venus-mars mr-2 text-lg text-blueGray-400"></i>
-                        Gender: {gender}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-building mr-2 text-lg text-blueGray-400"></i>
-                        Department: {department ? department : "Not assigned"}
-                      </div>
-                      <div className="mb-2 text-blueGray-600">
-                        <i className="fas fa-user-tag mr-2 text-lg text-blueGray-400"></i>
-                        Role: {user?.user}
-                      </div>
+                      <InfoItem label="Div" value={div} />
+                      <InfoItem label="GrNumber" value={grNumber} />
+                      <InfoItem label="Address" value={address} />
+                      <InfoItem label="Phone No" value={phone} />
+                      <InfoItem label="Gender" value={gender} />
+                      <InfoItem label="Department" value={department} />
+                      <InfoItem label="Role" value={user?.user} />
                     </div>
-                    <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                      <div className="flex flex-wrap justify-center">
-                        <div className="w-full lg:w-9/12 px-4">
-                          <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                            An artist of considerable range, Jenna the name
-                            taken by Melbourne-raised, Brooklyn-based Nick
-                            Murphy writes, performs and records all of his own
-                            music, giving it a warm, intimate feel with a solid
-                            groove structure. An artist of considerable range.
-                          </p>
-                          <a
-                            href="#pablo"
-                            className="font-normal text-pink-500"
-                          >
-                            Show more
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                    <div className="mt-10 py-10 border-t border-blueGray-200 text-center"></div>
                   </div>
                 </div>
               </div>
@@ -203,41 +166,15 @@ function Profile() {
         <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full  backdrop-blur-sm">
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Edit Profile
-                </h3>
-                <button
-                  type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={() => {
-                    setViewModel(false);
-                    formik.resetForm();
-                  }}
-                >
-                  <svg
-                    className="w-3 h-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
-                  </svg>
-                  <span className="sr-only">Close modal</span>
-                </button>
-              </div>
-
+              <ModelTop
+                setViewModel={setViewModel}
+                formik={formik}
+                ModelName={`Edit Profile`}
+              />
               <div className=" bg-gray-100  flex items-center justify-center ">
                 <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8  w-full">
                   <form onSubmit={formik.handleSubmit}>
-                    <FieldGroup fields={fields} formik={formik} options={''} />
+                    <FieldGroup fields={fields} formik={formik} options={""} />
                     <div className="flex justify-start mb-3">
                       <Image
                         src={image}

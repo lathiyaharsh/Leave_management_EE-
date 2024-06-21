@@ -1,10 +1,9 @@
 import axios from "axios";
 const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
+axios.defaults.withCredentials = true;
 export const getApiCall = async (url: string) => {
   try {
-    const res: any = await axios.get(`${baseUrl + url}`, {
-      withCredentials: true,
-    });
+    const res: any = await axios.get(`${baseUrl + url}`);
     return res;
   } catch (error: any) {
     console.error(error);
@@ -17,7 +16,6 @@ export const postApiCallWithImage = async (url: string, data: any) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      withCredentials: true,
     });
     return res;
   } catch (error: any) {
@@ -28,9 +26,7 @@ export const postApiCallWithImage = async (url: string, data: any) => {
 
 export const postApiCall = async (url: string, data: any) => {
   try {
-    const res: any = await axios.post(`${baseUrl + url}`, data, {
-      withCredentials: true,
-    });
+    const res: any = await axios.post(`${baseUrl + url}`, data);
     return res;
   } catch (error: any) {
     console.error(error);
@@ -43,7 +39,6 @@ export const putApiCall = async (url: string, data: any) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      withCredentials: true,
     });
     return res;
   } catch (error: any) {

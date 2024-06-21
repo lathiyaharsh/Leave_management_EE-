@@ -66,7 +66,7 @@ function Login() {
         <div className="text-3xl text-black font-bold underline text-center mb-6">
           Login
         </div>
-        <FieldGroup fields={fields} formik={formik} options={''} />
+        <FieldGroup fields={fields} formik={formik} options={""} />
         <Link
           href="/password/forgetpassword"
           className="text-sm text-blue-700 "
@@ -83,6 +83,13 @@ function Login() {
             >
               Log In
             </button>
+            
+            <Link
+              href="http://localhost:8007/api/v1/auth/google"
+              className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+               Continue With Google
+            </Link>
           </div>
         )}
       </form>

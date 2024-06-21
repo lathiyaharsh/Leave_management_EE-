@@ -27,7 +27,7 @@ function EmailInput({fields}) {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log("Form values", values);
+      
     },
   });
 

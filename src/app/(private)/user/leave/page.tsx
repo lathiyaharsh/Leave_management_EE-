@@ -18,7 +18,9 @@ import Loading from "@/Components/Loading";
 import { setUsers } from "@/lib/redux/actions/userActions";
 import { useUserContext } from "@/app/context/userContext";
 import Loading2 from "@/Components/Loading2";
-function convertNegativeToZero(number : number) {
+import ModelTop from "@/Components/ui/model/model";
+import InfoCard from "@/Components/leave/Div";
+function convertNegativeToZero(number: number) {
   if (number < 0) {
     return 0;
   } else {
@@ -43,7 +45,7 @@ const FecultyFetcher = () => {
     };
 
     getApi(url);
-  }, [dispatch,url]);
+  }, [dispatch, url]);
 
   return null;
 };
@@ -159,44 +161,21 @@ function Leave() {
                 Leave Balance
               </h2>
               <div className="mt-6">
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Total Leave
-                  </p>
-                  <p className="text-gray-600">{leaveData?.totalLeave}</p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Available Leave
-                  </p>
-                  <p className="text-gray-600">{remainingLeave}</p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Used Leave
-                  </p>
-                  <p className="text-gray-600">{leaveData?.usedLeave}</p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Total Working Days
-                  </p>
-                  <p className="text-gray-600">{leaveData?.totalWorkingDays}</p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Attendance Percentage
-                  </p>
-                  <p className="text-gray-600">
-                    {leaveData?.attendancePercentage}%
-                  </p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-lg font-medium text-gray-800">
-                    Academic Year
-                  </p>
-                  <p className="text-gray-600">{leaveData?.academicYear}</p>
-                </div>
+                <InfoCard title="Total Leave" value={leaveData.totalLeave} />
+                <InfoCard title="Available Leave" value={remainingLeave} />
+                <InfoCard title="Used Leave" value={leaveData.usedLeave} />
+                <InfoCard
+                  title="Total Working Days"
+                  value={leaveData.totalWorkingDays}
+                />
+                <InfoCard
+                  title="Attendance Percentage"
+                  value={`${leaveData.attendancePercentage}%`}
+                />
+                <InfoCard
+                  title="Academic Year"
+                  value={leaveData.academicYear}
+                />
                 <div className="mt-6 flex justify-center space-x-4">
                   <button
                     onClick={() => {
@@ -228,37 +207,11 @@ function Leave() {
                 <FecultyFetcher />
                 <div className="relative p-4 w-full max-w-md max-h-full">
                   <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        Apply Leave
-                      </h3>
-                      <button
-                        type="button"
-                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={() => {
-                          setViewModel(false);
-                          formik.resetForm();
-                        }}
-                      >
-                        <svg
-                          className="w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 14"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                          />
-                        </svg>
-                        <span className="sr-only">Close modal</span>
-                      </button>
-                    </div>
-
+                    <ModelTop
+                      setViewModel={setViewModel}
+                      formik={formik}
+                      ModelName={`Apply Leave`}
+                    />
                     <div className="bg-gray-100 flex items-center justify-center">
                       <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 w-full">
                         <form onSubmit={formik.handleSubmit}>

@@ -12,7 +12,7 @@ const authRoutes = ["/login", "/register"];
 const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword","/logout" ];
 
 export default async function middleware(req: NextRequest) {
-  const token = req.cookies.get("jwt")?.value;
+  const token = req.cookies.get("jwt")?.value ;
   
   const nextUrlPath = req.nextUrl.pathname;
 

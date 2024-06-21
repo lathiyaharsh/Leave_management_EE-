@@ -6,12 +6,7 @@ import {
   UserContextProvider,
   useUserContext,
 } from "@/app/context/userContext";
-import {
-  RoleContext,
-  RoleContextProvider,
-  useRoleContext,
-} from "@/app/context/userRole";
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -19,7 +14,10 @@ import fetchUser from "@/Utils/getUserDetails";
 import NavBar from "@/Components/Navbar";
 import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
-import { useRouter } from "next/navigation";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 export const UserFetcher = () => {
   try {
     const [, setUser] = useUserContext();
@@ -50,7 +48,6 @@ export default function RootLayout({
   return (
     <>
       <StoreProvider>
-        <RoleContextProvider>
           <UserContextProvider>
             <UserFetcher />
             <html lang="en">
@@ -64,7 +61,6 @@ export default function RootLayout({
               </body>
             </html>
           </UserContextProvider>
-        </RoleContextProvider>
       </StoreProvider>
     </>
   );
