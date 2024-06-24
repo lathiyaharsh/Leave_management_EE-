@@ -1,5 +1,5 @@
 "use client";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import { useState, useEffect } from "react";
 import { getColumns } from "./columns";
 import { DataTable } from "@/Components/DataTable/data-table";

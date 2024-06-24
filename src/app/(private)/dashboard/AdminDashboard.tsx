@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import { useState, useEffect } from "react";
 import { columns } from "./columns";
 import { LeaveDetails } from "@/Utils/types";

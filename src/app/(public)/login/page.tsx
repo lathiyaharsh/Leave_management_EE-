@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getApiCall, postApiCall } from "@/Utils/apiCall";
+import { getApiCall, postApiCall } from "@/service/apiCall";
 import { useUserContext } from "@/app/context/userContext";
 import Link from "next/link";
 import useModelValidation from "@/Components/ui/form/formValidation";
@@ -24,7 +24,9 @@ function Login() {
       try {
         setSignUpLoading(true);
         const result = await postApiCall("/auth/login", values);
-
+        if(result?.data?.token){
+          localStorage.setItem('jwt', result.data.token);
+        }
         if (result?.status == 200) {
           const findUser: any = await getApiCall("/user/profile");
           if (findUser?.data?.profile) {

@@ -23,7 +23,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { getApiCall } from "@/Utils/apiCall"; // Make sure this is correctly imported
+import { getApiCall } from "@/service/apiCall"; // Make sure this is correctly imported
 import { DataTableProps, SortType } from "@/Utils/types";
 
 export function DataTable<T>({

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {  postApiCall } from "@/Utils/apiCall";
+import {  postApiCall } from "@/service/apiCall";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import FieldGroup from "@/Components/ui/form/useInputGroup";

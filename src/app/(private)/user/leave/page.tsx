@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-import { getApiCall, postApiCall } from "@/Utils/apiCall";
+import { getApiCall, postApiCall } from "@/service/apiCall";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setLeaveBalance } from "@/lib/redux/actions/leaveBalance";
 import FieldGroup from "@/Components/ui/form/useInputGroup";

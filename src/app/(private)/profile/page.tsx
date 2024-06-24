@@ -7,7 +7,7 @@ import { useUserContext } from "@/app/context/userContext";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
-import { getApiCall, putApiCall } from "@/Utils/apiCall";
+import { getApiCall, putApiCall } from "@/service/apiCall";
 import { updateProfile } from "@/Components/ui/form/fields";
 import Loading from "@/Components/Loading";
 import ModelTop from "@/Components/ui/model/model";

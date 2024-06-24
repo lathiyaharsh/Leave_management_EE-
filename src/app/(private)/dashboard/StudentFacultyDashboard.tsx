@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
 import { prepareLeaveData } from "./utils";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import Loading from "@/Components/Loading";
 import { useUserContext } from "@/app/context/userContext";
 

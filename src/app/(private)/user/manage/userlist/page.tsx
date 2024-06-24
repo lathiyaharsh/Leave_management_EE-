@@ -1,5 +1,5 @@
 "use client";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import { getColumns } from "./columns"; // Import the function
 import { DataTable } from "@/Components/DataTable/data-table";
 import { useFormik } from "formik";
@@ -8,7 +8,7 @@ import Image from "next/image";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import useModelValidation from "@/Components/ui/form/formValidation";
-import { putApiCall } from "@/Utils/apiCall";
+import { putApiCall } from "@/service/apiCall";
 import { editUser } from "@/Components/ui/form/fields";
 import { toast } from "react-toastify";
 import Loading from "@/Components/Loading";

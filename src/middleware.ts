@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
+import { cookies } from "next/headers";
 
 const protectedRoutes: Record<string, string[]> = {
   student: ["/user/leave"],
@@ -12,7 +13,6 @@ const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword","
 
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("jwt")?.value ;
-  
   const nextUrlPath = req.nextUrl.pathname;
 
   if (nextUrlPath.startsWith("/api")) {

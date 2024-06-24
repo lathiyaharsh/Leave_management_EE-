@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 
 import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
-import { postApiCallWithImage } from "@/Utils/apiCall";
+import { postApiCallWithImage } from "@/service/apiCall";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import FieldGroup from "@/Components/ui/form/useInputGroup";

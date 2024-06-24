@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import { toast } from "react-toastify";
 import { LeaveStatus } from "@/Utils/types";
 

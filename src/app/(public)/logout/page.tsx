@@ -1,5 +1,5 @@
 "use client";
-import { getApiCall } from "@/Utils/apiCall";
+import { getApiCall } from "@/service/apiCall";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ const Logout = () => {
       try {
         const result = await getApiCall("/auth/logout");
         if (result?.status === 200) {
+          localStorage.removeItem("jwt");
           toast.success("Logout successful");
           router.push("/login");
         }else{

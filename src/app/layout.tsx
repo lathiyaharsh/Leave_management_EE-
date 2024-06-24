@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import fetchUser from "@/Utils/getUserDetails";
+import fetchUser from "@/service/getUserDetails";
 import NavBar from "@/Components/Navbar";
 import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
