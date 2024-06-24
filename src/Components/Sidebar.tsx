@@ -42,8 +42,8 @@ const admin: { title: string; href: string }[] = [
   },
 ];
 
-function SideBarUl({ role }:{role:{user:User}}) {
-  const user = role.user.user;
+function SideBarUl({ role }:{role:string}) {
+  const user = role;
   const components =
     user === "student"
       ? student

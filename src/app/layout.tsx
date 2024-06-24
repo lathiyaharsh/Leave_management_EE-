@@ -35,7 +35,7 @@ const UserFetcher = () => {
   }, [setUser]);
 
   
-  return null;
+  return (<></>);
 };
 
 

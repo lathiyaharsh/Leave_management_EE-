@@ -7,6 +7,7 @@ import SideBarLi from "./ui/SideBarli";
 import downArrow from "@/app/assets/images/down.png";
 import menuIcon from "@/app/assets/images/menus.png";
 import Image from "next/image";
+import { User } from "@/Utils/types";
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +77,7 @@ const NavBar = () => {
                 </button>
                 {isOpen && (
                   <>
-                    <SideBarUl role={{ user: { user: user?.user } }} />
+                    <SideBarUl role={user.user} />
                   </>
                 )}
               </li>

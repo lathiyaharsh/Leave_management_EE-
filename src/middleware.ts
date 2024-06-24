@@ -33,16 +33,13 @@ export default async function middleware(req: NextRequest) {
 
   if (authRoutes.some((route) => nextUrlPath.startsWith(route))) {
     if (token) {
-      console.log('run');
-      
       try {
         const secretKey  = process.env.SECRETKEY;
         const secretBytes = new TextEncoder().encode(secretKey);
         const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
-          payload: { role: string; _id: string };
+          payload: {data:{ role: string; _id: string }};
         };
-       
-        const role = payload?.data?.role;
+        const role :string = payload?.data?.role;
         const userProtectedRoutes = protectedRoutes[role] || [];
 
         const dashboardURL = new URL(
@@ -76,14 +73,12 @@ export default async function middleware(req: NextRequest) {
       const loginURL = new URL("/login", req.nextUrl.origin);
       return NextResponse.redirect(loginURL.toString());
     }
-    console.log('run');
     try {
       const secretKey = process.env.SECRETKEY;
       const secretBytes = new TextEncoder().encode(secretKey);
       const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
-        payload: { userDetails : any };
+        payload: {data:{ role: string; _id: string }};
       };
-
       const role = payload?.data?.role;
 
       const userProtectedRoutes = protectedRoutes[role] || [];

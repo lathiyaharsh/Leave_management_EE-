@@ -1,20 +1,20 @@
 import * as Yup from "yup";
 
-const stringValidation = (min, max, label) =>
+const stringValidation = (min:number, max:number, label:string) =>
   Yup.string()
     .min(min, `Must be ${min} characters or more`)
     .max(max, `Must be ${max} characters or less`)
     .required(`${label} is required`);
 
-const stringValidationOp = (min, max, label) =>
+const stringValidationOp = (min:number, max:number, label:string) =>
   Yup.string()
     .min(min, `Must be ${min} characters or more`)
     .max(max, `Must be ${max} characters or less`)
     .optional()
     .nullable()
-const requiredString = (label) => Yup.string().required(`${label} is required`);
-const requiredNumber = (label) => Yup.number().required(`${label} is required`);
-const requiredDate = (label) =>
+const requiredString = (label:string) => Yup.string().required(`${label} is required`);
+const requiredNumber = (label:string) => Yup.number().required(`${label} is required`);
+const requiredDate = (label:string) =>
   Yup.date()
     .required(`${label} letter is required`)
     .typeError(`${label} letter must be a valid date`);
@@ -23,7 +23,7 @@ const emailValidation = Yup.string()
   .required("Email is required");
 const passwordValidation = stringValidation(3, 12, "Password");
 const confirmPasswordValidation = Yup.string()
-  .oneOf([Yup.ref("password"), null], "Passwords must match")
+  .oneOf([Yup.ref("password"), ''], "Passwords must match")
   .required("Confirm password is required");
 
 const idValidation = requiredNumber("ID");
@@ -36,9 +36,9 @@ const reasonValidation = stringValidation(3, 200, "Reason");
 const leaveTypeValidation = requiredString("Leave type");
 const requestToIdValidation = requiredString("Request to ID");
 const otpValidation = stringValidation(3, 4, "Otp");
-const divValidation = stringValidationOp("0", "15","Div");
-const departmentValidation = stringValidationOp("0", "15", "Department");
-const grNumberValidation = stringValidationOp("0", "15", "Gr Number");
+const divValidation = stringValidationOp(0, 15,"Div");
+const departmentValidation = stringValidationOp(0, 15, "Department");
+const grNumberValidation = stringValidationOp(0, 15, "Gr Number");
 function useModelValidation(type: string) {
   switch (type) {
     case "add_student":

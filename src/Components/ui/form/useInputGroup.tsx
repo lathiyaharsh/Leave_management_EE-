@@ -37,7 +37,7 @@ export type TextInputProps = {
 const FieldGroup: React.FC<TextInputProps> = ({ fields, formik, options }) => {
   return (
     <>
-      {fields.map((field) => {
+      {fields.map((field : any) => {
         switch (field.type) {
           case "textarea":
             return (
