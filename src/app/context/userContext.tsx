@@ -1,6 +1,12 @@
-
 "use client";
-import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 // Define the type for the user context
 type UserContextType = [user: any, setUser: Dispatch<SetStateAction<any>>];
@@ -12,7 +18,6 @@ export const ModelContext = createContext<UserContextType>(defaultUserContext);
 // Define your provider component
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<any>(null);
-  
 
   return (
     <ModelContext.Provider value={[user, setUser]}>

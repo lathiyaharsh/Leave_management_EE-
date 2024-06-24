@@ -1,6 +1,6 @@
+"use client"
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
-import { cookies } from "next/headers";
 
 const protectedRoutes: Record<string, string[]> = {
   student: ["/user/leave","/user/leavestatus"],

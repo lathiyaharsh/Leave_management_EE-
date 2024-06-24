@@ -1,8 +1,8 @@
 "use client";
 import { useUserContext } from "@/app/context/userContext";
 import React from "react";
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import AdminComponent from "./AdminDashboard";
 import StudentFacultyComponent from "./StudentFacultyDashboard";
 import fetchUser from "@/service/getUserDetails";
@@ -12,7 +12,7 @@ function Dashboard() {
   const [, setUser] = useUserContext();
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
+    const token = params.get("token");
     const getApi = async () => {
       try {
         const result = await fetchUser();
@@ -22,11 +22,10 @@ function Dashboard() {
       }
     };
     if (token) {
-      localStorage.setItem('jwt', token);
+      localStorage.setItem("jwt", token);
       getApi();
     }
-    
-  }, [router,setUser]);
+  }, [router, setUser]);
   const [user] = useUserContext();
   const role: any = user?.user;
   if (!role) {

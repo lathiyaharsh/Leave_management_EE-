@@ -11,7 +11,11 @@ import {
 import Image from "next/image";
 import { User } from "@/Utils/types";
 
-export const getColumns = (setViewModel: (value: boolean) => void, setEditUserData: (userData: User) => void, formik: any) => [
+export const getColumns = (
+  setViewModel: (value: boolean) => void,
+  setEditUserData: (userData: User) => void,
+  formik: any
+) => [
   {
     accessorKey: "id",
     header: "User Id",
@@ -52,7 +56,7 @@ export const getColumns = (setViewModel: (value: boolean) => void, setEditUserDa
   {
     accessorKey: "createdAt",
     header: "Create Date",
-    cell: ({ row } : any) => {
+    cell: ({ row }: any) => {
       const timestamp = row.getValue("createdAt");
       const date = moment(timestamp);
       const formatted = date.format("YYYY-MM-DD");

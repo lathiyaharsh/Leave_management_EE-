@@ -24,8 +24,8 @@ function Login() {
       try {
         setSignUpLoading(true);
         const result = await postApiCall("/auth/login", values);
-        if(result?.data?.token){
-          localStorage.setItem('jwt', result.data.token);
+        if (result?.data?.token) {
+          localStorage.setItem("jwt", result.data.token);
         }
         if (result?.status == 200) {
           const findUser: any = await getApiCall("/user/profile");

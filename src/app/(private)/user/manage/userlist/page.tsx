@@ -28,7 +28,7 @@ export default function DemoPage() {
   const [editUserData, setEditUserData] = useState<User | null>(null);
   const [viewModel, setViewModel] = useState(false);
   const [user] = useUserContext();
-  
+
   const deleteUser = async (url: string) => {
     try {
       const results = await getApiCall(url);
@@ -56,7 +56,8 @@ export default function DemoPage() {
         const searchQuery: string = `search=${encodeURIComponent(query)}`;
         const sorting: any = getSorting;
         const sortParams: string[] = sorting.map(
-          (sort: SortType) => `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
+          (sort: SortType) =>
+            `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const url = `/user/studentList?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
         const result = await getApiCall(url);
@@ -66,12 +67,13 @@ export default function DemoPage() {
           setLoading(false);
         }
       } catch (error) {
-        console.error("Error fetching leave data:", error);
+        toast.error(error);
+        console.log("Error fetching leave data:", error);
         setLoading(false);
       }
     };
     fetchLeaveData();
-  }, [currentPage, reloadData,getSorting,query]);
+  }, [currentPage, reloadData]);
 
   const formik = useFormik({
     initialValues: useInitialValues("editUser"),
@@ -122,7 +124,7 @@ export default function DemoPage() {
               query={query}
               setGetSorting={setGetSorting}
               getSorting={getSorting}
-              urlType={'studentList'}
+              urlType={"studentList"}
             />
             <Pagination
               currentPage={currentPage}
@@ -130,19 +132,27 @@ export default function DemoPage() {
               maxPage={maxPage}
             />
           </div>
-          
+
           {viewModel && (
             <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-blur-sm">
               <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <ModelTop setViewModel={setViewModel} formik={formik} ModelName={`Edit Student ${editUserData?.id} : ${editUserData?.name}`} />
+                  <ModelTop
+                    setViewModel={setViewModel}
+                    formik={formik}
+                    ModelName={`Edit Student ${editUserData?.id} : ${editUserData?.name}`}
+                  />
                   <div className=" bg-gray-100  flex items-center justify-center ">
                     <div className="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8  w-full">
                       <form onSubmit={formik.handleSubmit}>
-                        <FieldGroup fields={fields} formik={formik} options={''} />
+                        <FieldGroup
+                          fields={fields}
+                          formik={formik}
+                          options={""}
+                        />
                         Current Image
                         <div className="flex justify-start mb-3">
-                        {editUserData && (
+                          {editUserData && (
                             <Image
                               src={editUserData.image}
                               alt="User Avatar"
@@ -174,11 +184,11 @@ export default function DemoPage() {
                                   "Are you sure you want to Delete User?"
                                 );
                                 if (sure) {
-                                deleteUser(
-                                  `/user/removeUser/${editUserData?.id}`
-                                );
-                                setViewModel(false);
-                              }
+                                  deleteUser(
+                                    `/user/removeUser/${editUserData?.id}`
+                                  );
+                                  setViewModel(false);
+                                }
                               }}
                             >
                               Delete User

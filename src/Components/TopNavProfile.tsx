@@ -4,7 +4,7 @@ import { useState } from "react";
 import A from "./ui/a";
 import { User } from "@/Utils/types";
 
-function TopNavProfile({ user }:{ user :{user:User}}) {
+function TopNavProfile({ user }: { user: { user: User } }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 

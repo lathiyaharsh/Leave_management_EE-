@@ -18,7 +18,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
-
 const UserFetcher = () => {
   const [, setUser] = useUserContext();
 
@@ -29,7 +28,7 @@ const UserFetcher = () => {
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
-  }, [setUser]); 
+  }, [setUser]);
 
   useEffect(() => {
     fetchUserAndUpdate();

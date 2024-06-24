@@ -11,6 +11,7 @@
         "LEAVEBALANCE",
         "leavestatus",
         "manageleave",
+        "SECRETKEY",
         "tanstack",
         "toastify",
         "UPDATELEAVEBALANCE",

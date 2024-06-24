@@ -1,4 +1,4 @@
-import {  MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import moment from "moment";
 import {
@@ -17,7 +17,9 @@ interface TableColumn {
   id?: string;
   cell?: (props: { row: any }) => JSX.Element;
 }
-export const getColumns = (setReloadData: (value: any) => void): TableColumn[] => [
+export const getColumns = (
+  setReloadData: (value: any) => void
+): TableColumn[] => [
   {
     accessorKey: "id",
     header: "Leave Id",
@@ -72,8 +74,8 @@ export const getColumns = (setReloadData: (value: any) => void): TableColumn[] =
           const result = await getApiCall(url);
           if (result?.status == 200) {
             toast.success(result.data.message);
-            setReloadData((prev:boolean) => !prev); 
-          }else {
+            setReloadData((prev: boolean) => !prev);
+          } else {
             toast.error(result.message);
           }
         } catch (error) {

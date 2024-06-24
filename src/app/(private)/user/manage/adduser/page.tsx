@@ -29,7 +29,7 @@ const SignUp = () => {
       } catch (error) {
         toast.error("Add User failed");
       } finally {
-        setSignUpLoading(false); 
+        setSignUpLoading(false);
       }
     },
   });

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {  postApiCall } from "@/service/apiCall";
+import { postApiCall } from "@/service/apiCall";
 import useModelValidation from "@/Components/ui/form/formValidation";
 import useInitialValues from "@/Components/ui/form/useInitialValues";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
@@ -129,7 +129,7 @@ function ForgetPassword() {
                   maxLength={4}
                   value={otp}
                   onChange={(otp) => {
-                    formik.setValues((v:any) => {
+                    formik.setValues((v: any) => {
                       return { ...v, otp };
                     });
                   }}
@@ -168,7 +168,11 @@ function ForgetPassword() {
           )}
           {showPassword && (
             <>
-              <FieldGroup fields={resetPasswordInputs} formik={formik}  options={''} />
+              <FieldGroup
+                fields={resetPasswordInputs}
+                formik={formik}
+                options={""}
+              />
             </>
           )}
 

@@ -12,7 +12,7 @@ import { signUp } from "@/Components/ui/form/fields";
 import Loading2 from "@/Components/Loading2";
 const SignUp = () => {
   const router = useRouter();
-  const [signUpLoading,setSignUpLoading] = useState(false);
+  const [signUpLoading, setSignUpLoading] = useState(false);
   const formik = useFormik({
     initialValues: useInitialValues("add_student"),
     validationSchema: useModelValidation("add_student"),
@@ -30,8 +30,8 @@ const SignUp = () => {
         }
       } catch (error) {
         toast.error("SignUp failed");
-      }finally {
-        setSignUpLoading(false); 
+      } finally {
+        setSignUpLoading(false);
       }
     },
   });
@@ -43,9 +43,8 @@ const SignUp = () => {
           SignUp Page
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <FieldGroup fields={fields} formik={formik} options={''} />
+          <FieldGroup fields={fields} formik={formik} options={""} />
 
-          
           {signUpLoading ? (
             <Loading2 />
           ) : (

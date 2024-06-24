@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Logout = () => {
   const router = useRouter();
-  const [,setUser] = useUserContext();
+  const [, setUser] = useUserContext();
   useEffect(() => {
     const logout = async () => {
       try {
@@ -17,7 +17,7 @@ const Logout = () => {
           localStorage.removeItem("jwt");
           toast.success("Logout successful");
           router.push("/login");
-        }else{
+        } else {
           toast.error("Try again");
         }
       } catch (error) {
@@ -26,7 +26,7 @@ const Logout = () => {
     };
 
     logout();
-  }, [router,setUser]);
+  }, [router, setUser]);
 
   return <></>;
 };
