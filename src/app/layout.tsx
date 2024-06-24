@@ -14,31 +14,30 @@ import fetchUser from "@/service/getUserDetails";
 import NavBar from "@/Components/Navbar";
 import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
-export const UserFetcher = () => {
-  try {
-    const [, setUser] = useUserContext();
+const UserFetcher = () => {
+  const [, setUser] = useUserContext();
 
-    useEffect(() => {
-      const getApi = async () => {
-        try {
-          const result = await fetchUser();
-          setUser(result);
-        } catch (error) {
-          console.error("Error fetching user Role:", error);
-        }
-      };
-      getApi();
-    }, [setUser]);
+  useEffect(() => {
+    const getApi = async () => {
+      try {
+        const result = await fetchUser();
+        setUser(result);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
 
-    return null;
-  } catch (error) {
-    console.log(error);
-  }
+    getApi();
+  }, [setUser]);
+
+  
+  return null;
 };
+
 
 export default function RootLayout({
   children,
@@ -47,21 +46,21 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <StoreProvider>
-          <UserContextProvider>
-            <UserFetcher />
-            <html lang="en">
-              <body className={inter.className}>
-                <NavBar />
-                <div className="top-nav-spacer"></div>
-                <div className="side-bar-spacer sm:ms-60">
-                  <div className="sm:ms-4">{children}</div>
-                </div>
-                <ToastContainer />
-              </body>
-            </html>
-          </UserContextProvider>
-      </StoreProvider>
+      <UserContextProvider>
+        <StoreProvider>
+          <UserFetcher />
+          <html lang="en">
+            <body className={inter.className}>
+              <NavBar />
+              <div className="top-nav-spacer"></div>
+              <div className="side-bar-spacer sm:ms-60">
+                <div className="sm:ms-4">{children}</div>
+              </div>
+              <ToastContainer />
+            </body>
+          </html>
+        </StoreProvider>
+      </UserContextProvider>
     </>
   );
 }
