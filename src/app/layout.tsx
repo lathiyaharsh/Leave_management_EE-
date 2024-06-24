@@ -6,7 +6,7 @@ import {
   UserContextProvider,
   useUserContext,
 } from "@/app/context/userContext";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -18,26 +18,25 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
+
 const UserFetcher = () => {
   const [, setUser] = useUserContext();
 
+  const fetchUserAndUpdate = useCallback(async () => {
+    try {
+      const result = await fetchUser();
+      setUser(result);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  }, [setUser]); 
+
   useEffect(() => {
-    const getApi = async () => {
-      try {
-        const result = await fetchUser();
-        setUser(result);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
+    fetchUserAndUpdate();
+  }, [fetchUserAndUpdate]);
 
-    getApi();
-  }, [setUser]);
-
-  
-  return (<></>);
+  return null;
 };
-
 
 export default function RootLayout({
   children,
@@ -48,9 +47,9 @@ export default function RootLayout({
     <>
       <UserContextProvider>
         <StoreProvider>
-          <UserFetcher />
           <html lang="en">
             <body className={inter.className}>
+              <UserFetcher />
               <NavBar />
               <div className="top-nav-spacer"></div>
               <div className="side-bar-spacer sm:ms-60">
