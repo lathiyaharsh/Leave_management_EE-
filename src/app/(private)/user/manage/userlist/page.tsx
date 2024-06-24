@@ -67,8 +67,7 @@ export default function DemoPage() {
           setLoading(false);
         }
       } catch (error) {
-        toast.error(error);
-        console.log("Error fetching leave data:", error);
+        console.error("Error fetching leave data:", error);
         setLoading(false);
       }
     };
