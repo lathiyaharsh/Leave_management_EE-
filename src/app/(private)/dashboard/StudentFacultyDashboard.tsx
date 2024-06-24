@@ -8,9 +8,10 @@ import { useUserContext } from "@/app/context/userContext";
 function StudentFacultyComponent() {
   const [leaveData, setLeaveData] = useState({});
   const [currentYear, setCurrentYear] = useState(2024);
-  const [currentMonth, setCurrentMonth] = useState(5); // June (zero-based index)
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); 
   const [loading, setLoading] = useState(true);
   const [user] = useUserContext();
+  
   useEffect(() => {
     const fetchLeaveData = async (year: number, month: number) => {
       setLoading(true);
