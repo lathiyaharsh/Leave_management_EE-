@@ -3,7 +3,7 @@ import * as jose from "jose";
 import { cookies } from "next/headers";
 
 const protectedRoutes: Record<string, string[]> = {
-  student: ["/user/leave"],
+  student: ["/user/leave","/user/leavestatus"],
   faculty: ["/dashboard","/lms/faculty","/user/manage"],
   admin: ["/dashboard","/admin", "/user/admin","/user/manage"],
 };
@@ -12,7 +12,7 @@ const authRoutes = ["/login", "/register"];
 const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword","/logout" ];
 
 export default async function middleware(req: NextRequest) {
-  const token = req.cookies.get("jwt")?.value ;
+  const token = await req.cookies.get("jwt")?.value ;
   const nextUrlPath = req.nextUrl.pathname;
 
   if (nextUrlPath.startsWith("/api")) {
@@ -33,6 +33,8 @@ export default async function middleware(req: NextRequest) {
 
   if (authRoutes.some((route) => nextUrlPath.startsWith(route))) {
     if (token) {
+      console.log('run');
+      
       try {
         const secretKey  = process.env.SECRETKEY;
         const secretBytes = new TextEncoder().encode(secretKey);
@@ -74,7 +76,7 @@ export default async function middleware(req: NextRequest) {
       const loginURL = new URL("/login", req.nextUrl.origin);
       return NextResponse.redirect(loginURL.toString());
     }
-
+    console.log('run');
     try {
       const secretKey = process.env.SECRETKEY;
       const secretBytes = new TextEncoder().encode(secretKey);
