@@ -14,7 +14,7 @@ export default function DemoPage() {
   const [reloadData, setReloadData] = useState(false);
   const [query, setQuery] = useState("");
   const [getSorting, setGetSorting] = useState("");
-
+  console.log(reloadData);
   useEffect(() => {
     const fetchLeaveData = async () => {
       setLoading(true);
@@ -25,7 +25,7 @@ export default function DemoPage() {
           (sort: SortType) =>
             `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
-        const url = `/leave/leaveStatus?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
+        const url = `/leave?${searchQuery}&page=${currentPage}&sort=${sortParams.join(",")}`;
         const result = await getApiCall(url);
         if (result?.data?.leaveStatus) {
           setData(result.data.leaveStatus);
@@ -38,7 +38,7 @@ export default function DemoPage() {
       }
     };
     fetchLeaveData();
-  }, [currentPage, reloadData, getSorting, query]);
+  }, [currentPage, setReloadData]);
   return (
     <>
       {loading ? (
@@ -47,7 +47,7 @@ export default function DemoPage() {
         <>
           <div className="p-4">
             <DataTable
-              columns={getColumns(setReloadData)}
+              columns={getColumns(setLoading)}
               data={data}
               setData={setData}
               currentPage={currentPage}

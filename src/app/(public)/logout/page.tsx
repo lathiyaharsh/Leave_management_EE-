@@ -11,7 +11,7 @@ const Logout = () => {
   useEffect(() => {
     const logout = async () => {
       try {
-        const result = await getApiCall("/auth/logout");
+        const result = await getApiCall("/auth");
         if (result?.status === 200) {
           setUser(null);
           localStorage.removeItem("jwt");

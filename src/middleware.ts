@@ -1,18 +1,18 @@
-"use client"
+"use client";
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
 
 const protectedRoutes: Record<string, string[]> = {
-  student: ["/user/leave","/user/leavestatus"],
-  faculty: ["/dashboard","/lms/faculty","/user/manage"],
-  admin: ["/dashboard","/admin", "/user/admin","/user/manage"],
+  student: ["/dashboard", "/user/leave", "/user/leavestatus"],
+  faculty: ["/dashboard", "/user/manage"],
+  admin: ["/dashboard", "/admin", "/user/admin", "/user/manage"],
 };
-const commonRoutes = ["/dashboard", "/profile","/logout"]; //protected
-const authRoutes = ["/login", "/register"];
-const publicRoutes = ["/blog", "/about", "/lmsAuth","/password/forgetpassword","/logout" ];
+const commonRoutes = ["/dashboard", "/profile", "/logout"]; //protected
+const authRoutes = ["/login", "/register", "/password/forgetpassword"];
+const publicRoutes = ["/logout"];
 
 export default async function middleware(req: NextRequest) {
-  const token = await req.cookies.get("jwt")?.value ;
+  const token = await req.cookies.get("jwt")?.value;
   const nextUrlPath = req.nextUrl.pathname;
 
   if (nextUrlPath.startsWith("/api")) {
@@ -34,12 +34,12 @@ export default async function middleware(req: NextRequest) {
   if (authRoutes.some((route) => nextUrlPath.startsWith(route))) {
     if (token) {
       try {
-        const secretKey  = process.env.SECRETKEY;
+        const secretKey = process.env.SECRETKEY;
         const secretBytes = new TextEncoder().encode(secretKey);
         const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
-          payload: {data:{ role: string; _id: string }};
+          payload: { data: { role: string; _id: string } };
         };
-        const role :string = payload?.data?.role;
+        const role: string = payload?.data?.role;
         const userProtectedRoutes = protectedRoutes[role] || [];
 
         const dashboardURL = new URL(
@@ -63,7 +63,7 @@ export default async function middleware(req: NextRequest) {
     ...Object.values(protectedRoutes).flat(),
     ...commonRoutes,
   ];
-  
+
   if (
     allProtectedRoutes.some((route) =>
       new RegExp(`^${route}(?:/|$)`).test(nextUrlPath)
@@ -77,12 +77,12 @@ export default async function middleware(req: NextRequest) {
       const secretKey = process.env.SECRETKEY;
       const secretBytes = new TextEncoder().encode(secretKey);
       const { payload } = (await jose.jwtVerify(token, secretBytes)) as {
-        payload: {data:{ role: string; _id: string }};
+        payload: { data: { role: string; _id: string } };
       };
       const role = payload?.data?.role;
 
       const userProtectedRoutes = protectedRoutes[role] || [];
-      const allUserProtectedRoutes = [...commonRoutes,...userProtectedRoutes];
+      const allUserProtectedRoutes = [...commonRoutes, ...userProtectedRoutes];
       console.log(allUserProtectedRoutes);
 
       if (

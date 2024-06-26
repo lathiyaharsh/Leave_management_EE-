@@ -1,5 +1,5 @@
 "use client";
-import { getApiCall } from "@/service/apiCall";
+import { deleteApiCall, getApiCall } from "@/service/apiCall";
 import { getColumns } from "./columns"; // Import the function
 import { DataTable } from "@/Components/DataTable/data-table";
 import { useFormik } from "formik";
@@ -31,7 +31,7 @@ export default function DemoPage() {
 
   const deleteUser = async (url: string) => {
     try {
-      const results = await getApiCall(url);
+      const results = await deleteApiCall(url);
       if (results?.status == 200) {
         toast.success("Deleted");
         const url = `/user/studentList?&page=${currentPage}`;
@@ -82,7 +82,7 @@ export default function DemoPage() {
         if (editUserData) {
           setLoading(true);
           const result = await putApiCall(
-            `/user/editUser/${editUserData?.id}`,
+            `/user/${editUserData?.id}`,
             values
           );
           if (result?.status == 200) {
@@ -184,7 +184,7 @@ export default function DemoPage() {
                                 );
                                 if (sure) {
                                   deleteUser(
-                                    `/user/removeUser/${editUserData?.id}`
+                                    `/user/${editUserData?.id}`
                                   );
                                   setViewModel(false);
                                 }

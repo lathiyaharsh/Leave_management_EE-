@@ -1,11 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
-  return (
-    <>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        Home
-      </main>
-    </>
-  );
+  const router = useRouter();
+  const token = localStorage.getItem("token");
+  if (token) {
+    router.push("/dashboard");
+  } else {
+    router.push("/login");
+  }
+  return <></>;
 }

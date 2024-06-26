@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import Loading from "@/Components/Loading";
 import { setUsers } from "@/lib/redux/actions/userActions";
-import { useUserContext } from "@/app/context/userContext";
 import Loading2 from "@/Components/Loading2";
 import ModelTop from "@/Components/ui/model/model";
 import InfoCard from "@/Components/leave/Div";
@@ -28,7 +27,6 @@ function convertNegativeToZero(number: number) {
 }
 const FecultyFetcher = () => {
   const dispatch = useAppDispatch();
-  const [user] = useUserContext();
   let url = "/user/userList?limit=100&roleType=3";
 
   useEffect(() => {
@@ -81,7 +79,7 @@ function Leave() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const result = await postApiCall("/leave/applyLeave", values);
+        const result = await postApiCall("/leave/", values);
         if (result?.status == 201) {
           setLoading(false);
           toast.success("Apply leave successful");

@@ -16,6 +16,7 @@ import { StoreProvider } from "../../StoreProvider";
 const inter = Inter({ subsets: ["latin"] });
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import TopNavBar from "@/Components/TopNav";
 config.autoAddCss = false;
 
 const UserFetcher = () => {
@@ -49,11 +50,9 @@ export default function RootLayout({
           <html lang="en">
             <body className={inter.className}>
               <UserFetcher />
-              <NavBar />
-              <div className="top-nav-spacer"></div>
-              <div className="side-bar-spacer sm:ms-60">
-                <div className="sm:ms-4">{children}</div>
-              </div>
+
+              <div className="">{children}</div>
+
               <ToastContainer />
             </body>
           </html>

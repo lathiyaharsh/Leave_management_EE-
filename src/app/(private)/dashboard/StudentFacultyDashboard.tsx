@@ -18,7 +18,7 @@ function StudentFacultyComponent() {
       try {
         let url = `/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`;
         if (user.user == "faculty" || user.user == "admin") {
-          url = `/leave/leaveStatus?year=${year}&month=${month}&limit=1000`;
+          url = `/leave/?year=${year}&month=${month}&limit=1000`;
         }
         const response = await getApiCall(url);
         if (response.data.leaveStatus) {

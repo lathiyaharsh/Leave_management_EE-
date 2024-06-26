@@ -12,26 +12,51 @@ function SideBarLi({ user }: { user: { user: User } }) {
       title: "Leave",
       href: "/user/leave",
     },
+    {
+      title: "Leave Status",
+      href: "/user/leavestatus",
+    },
   ];
 
-  const faculty: { title: string; href: string }[] = [];
-  const admin: { title: string; href: string }[] = [];
-  const loginCommune: { title: string; href: string }[] = [
+  const faculty: { title: string; href: string }[] = [
     {
-      title: userName || "Profile",
-      href: "/profile",
+      title: "Add User",
+      href: "/user/manage/adduser",
     },
+    {
+      title: "Leave Requests",
+      href: "/user/manage/manageleave",
+    },
+    {
+      title: "Student List",
+      href: "/user/manage/userlist",
+    },
+  ];
+  const admin: { title: string; href: string }[] = [
+    {
+      title: "Add User",
+      href: "/user/manage/adduser",
+    },
+    {
+      title: "Leave Requests",
+      href: "/user/manage/manageleave",
+    },
+    {
+      title: "Student List",
+      href: "/user/manage/userlist",
+    },
+    {
+      title: "Faculty List",
+      href: "/user/admin/facultylist",
+    },
+  ];
+  const loginCommune: { title: string; href: string }[] = [
     {
       title: "Dashboard",
       href: "/dashboard",
     },
   ];
-  const bottomCommune: { title: string; href: string }[] = [
-    {
-      title: "Logout",
-      href: "/logout",
-    },
-  ];
+ 
 
   const guest: { title: string; href: string }[] = [
     {
@@ -60,7 +85,6 @@ function SideBarLi({ user }: { user: { user: User } }) {
         <>
           <A links={{ linkDetails: loginCommune }} />
           <A links={{ linkDetails: components }} />
-          <A links={{ linkDetails: bottomCommune }} />
         </>
       ) : (
         <>

@@ -67,10 +67,6 @@ export const getColumns = (
     accessorKey: "address",
     header: "address",
   },
-  // {
-  //   accessorKey: "grNumber",
-  //   header: "grNumber",
-  // },
   {
     accessorKey: "department",
     header: "department",

@@ -69,7 +69,7 @@ export function DataTable<T>({
             `${sort.id.replace("_", ".")}:${sort.desc ? "desc" : "asc"}`
         );
         const result = await getApiCall(
-          `/leave/leaveStatus?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
+          `/leave?search=${query}&page=${currentPage}&sort=${sortParams.join(",")}`
         );
         if (result?.data?.leaveStatus) {
           setData(result.data.leaveStatus);
@@ -115,7 +115,7 @@ export function DataTable<T>({
     fetchFilteredData(query, sorting);
     setQuery(query);
     setGetSorting(sorting);
-  }, 300);
+  }, 100);
 
   const table = useReactTable({
     data,
@@ -206,21 +206,29 @@ export function DataTable<T>({
               ))}
             </thead>
             <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
+              {table.getRowModel().rows.length > 0 ? (
+                table.getRowModel().rows.map((row) => (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={columns.length} className="px-6 py-4 text-center text-sm font-medium text-gray-500">
+                    No data found
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

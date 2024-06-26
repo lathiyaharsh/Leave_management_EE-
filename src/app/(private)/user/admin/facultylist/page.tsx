@@ -72,7 +72,7 @@ export default function DemoPage() {
       }
     };
     fetchLeaveData();
-  }, [currentPage, reloadData, getSorting, query]);
+  }, [currentPage, reloadData]);
 
   const formik = useFormik({
     initialValues: useInitialValues("editUser"),
@@ -82,7 +82,7 @@ export default function DemoPage() {
         if (editUserData) {
           setLoading(true);
           const result = await putApiCall(
-            `/user/editUser/${editUserData?.id}`,
+            `/user/${editUserData?.id}`,
             values
           );
           if (result?.status == 200) {
@@ -180,7 +180,7 @@ export default function DemoPage() {
                                 );
                                 if (sure) {
                                   deleteUser(
-                                    `/user/removeUser/${editUserData?.id}`
+                                    `/user/${editUserData?.id}`
                                   );
                                   setViewModel(false);
                                 }

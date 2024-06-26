@@ -198,7 +198,7 @@ const SelectInput: React.FC<TextInputProps>  = ({ field, touched, error , option
         value={value}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
-        <option value="">Select {title}</option>
+        <option className="hidden" value="" selected>Select {title}</option>
         {options.map((option:Option) => (
           <option key={option.value} value={option.value}>
             {option.label}

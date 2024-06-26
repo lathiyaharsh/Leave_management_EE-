@@ -8,7 +8,7 @@ const fetchUser = async () => {
     if (!token) {
       return "guest";
     }
-    let url = "/user/profile";
+    let url = "/user/";
 
     const userProfile = await axios.get(`${baseUrl + url}`, {
       withCredentials: true,

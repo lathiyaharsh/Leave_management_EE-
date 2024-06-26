@@ -12,7 +12,7 @@ import { getApiCall } from "@/service/apiCall";
 import { toast } from "react-toastify";
 import { LeaveStatus } from "@/Utils/types";
 
-export const getColumns = (setReloadData: (value: any) => void) => [
+export const getColumns = (setLoading) => [
   {
     accessorKey: "id",
     header: "Leave Id",
@@ -80,10 +80,11 @@ export const getColumns = (setReloadData: (value: any) => void) => [
       const updateLeaveData = async (url: string) => {
         try {
           toast.success("Processing...");
+          setLoading(true)
           const result = await getApiCall(url);
           if (result?.status == 200) {
             toast.success(result.data.message);
-            setReloadData((prev: boolean) => !prev); // Trigger a data refresh
+            setLoading(false)
           } else {
             toast.error(result.message);
           }

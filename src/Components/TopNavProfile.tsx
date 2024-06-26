@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { useState } from "react";
 import A from "./ui/a";
 import { User } from "@/Utils/types";
 
 function TopNavProfile({ user }: { user: { user: User } }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 
   const userRole = user?.user?.user || "Guest";
@@ -30,28 +31,11 @@ function TopNavProfile({ user }: { user: { user: User } }) {
       href: "/profile",
     },
     {
-      title: "Dashboard",
-      href: "/dashboard",
-    },
-    {
       title: "Logout",
       href: "/logout",
     },
   ];
-  const communeForAll: { title: string; href: string }[] = [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "About",
-      href: "/about",
-    },
-    {
-      title: "Blog",
-      href: "/blog    ",
-    },
-  ];
+  const communeForAll: { title: string; href: string }[] = [];
   const communeComponents = commune;
   const components =
     userRole === "Guest"
@@ -63,6 +47,20 @@ function TopNavProfile({ user }: { user: { user: User } }) {
           : userRole === "admin"
             ? admin
             : null;
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
   return (
     <>
       <A links={{ linkDetails: communeForAll }} />
@@ -88,7 +86,10 @@ function TopNavProfile({ user }: { user: { user: User } }) {
           </div>
 
           {isUserMenuOpen && (
-            <div className="absolute right-0 top-4 mt-10 w-48 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+            <div
+              ref={menuRef}
+              className="absolute right-0 top-4 mt-10 w-48 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+            >
               <div className="py-1">
                 <A links={{ linkDetails: components }} />
                 <A links={{ linkDetails: communeComponents }} />
@@ -117,12 +118,14 @@ function TopNavProfile({ user }: { user: { user: User } }) {
             </button>
           </div>
           {isUserMenuOpen && (
-            <div className="absolute right-0 top-4 mt-10 w-48 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+            <div
+              ref={menuRef}
+              className="absolute right-0 top-4 mt-10 w-48 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+            >
               <div className="py-1">
                 <p className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                   Hello Guest
                 </p>
-                <A links={{ linkDetails: guest }} />
               </div>
             </div>
           )}

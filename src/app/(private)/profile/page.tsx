@@ -36,10 +36,10 @@ function Profile() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const result = await putApiCall("/user/editProfile", values);
+        const result = await putApiCall("/user/", values);
         if (result?.status == 200) {
           if (typeof values.image == "object") {
-            const userData = await getApiCall("/user/profile");
+            const userData = await getApiCall("/user/");
             setUser(userData.data.profile);
           } else {
             setUser((v: any) => {

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import FieldGroup from "@/Components/ui/form/useInputGroup";
 import { signUp } from "@/Components/ui/form/fields";
 import Loading2 from "@/Components/Loading2";
+import Link from "next/link";
 const SignUp = () => {
   const router = useRouter();
   const [signUpLoading, setSignUpLoading] = useState(false);
@@ -19,7 +20,7 @@ const SignUp = () => {
     onSubmit: async (values) => {
       try {
         setSignUpLoading(true);
-        const result = await postApiCallWithImage("/user/register", values);
+        const result = await postApiCallWithImage("/user/", values);
         if (result?.status == 201) {
           setSignUpLoading(false);
           toast.success("SignUp successful");
@@ -48,13 +49,16 @@ const SignUp = () => {
           {signUpLoading ? (
             <Loading2 />
           ) : (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-5">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Sign Up
               </button>
+              <Link href="/login" className="text-sm mt-10 text-blue-700 ">
+                 Already have an Account Login ?
+              </Link>
             </div>
           )}
         </form>

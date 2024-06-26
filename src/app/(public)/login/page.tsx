@@ -23,12 +23,12 @@ function Login() {
     onSubmit: async (values) => {
       try {
         setSignUpLoading(true);
-        const result = await postApiCall("/auth/login", values);
+        const result = await postApiCall("/auth/", values);
         if (result?.data?.token) {
           localStorage.setItem("jwt", result.data.token);
         }
         if (result?.status == 200) {
-          const findUser: any = await getApiCall("/user/profile");
+          const findUser: any = await getApiCall("/user/");
           if (findUser?.data?.profile) {
             const loginUser = findUser?.data?.profile;
             setUser(loginUser);
@@ -76,7 +76,7 @@ function Login() {
         {signUpLoading ? (
           <Loading2 />
         ) : (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-3">
             <button
               type="submit"
               className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -92,7 +92,14 @@ function Login() {
             </Link>
           </div>
         )}
+         <Link
+          href="/signUp"
+          className="text-sm mt-10 text-blue-700 "
+        >
+          Have not an account ?
+        </Link>
       </form>
+      
     </div>
   );
 }

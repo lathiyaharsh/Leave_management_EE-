@@ -3,43 +3,14 @@ import Link from "next/link";
 import React from "react";
 
 const student: { title: string; href: string }[] = [
-  {
-    title: "Leave Status",
-    href: "/user/leavestatus",
-  },
+  
 ];
 
 const faculty: { title: string; href: string }[] = [
-  {
-    title: "Add User",
-    href: "/user/manage/adduser",
-  },
-  {
-    title: "Leave Requests",
-    href: "/user/manage/manageleave",
-  },
-  {
-    title: "Student List",
-    href: "/user/manage/userlist",
-  },
+  
 ];
 const admin: { title: string; href: string }[] = [
-  {
-    title: "Add User",
-    href: "/user/manage/adduser",
-  },
-  {
-    title: "Leave Requests",
-    href: "/user/manage/manageleave",
-  },
-  {
-    title: "Student List",
-    href: "/user/manage/userlist",
-  },
-  {
-    title: "Faculty List",
-    href: "/user/admin/facultylist",
-  },
+  
 ];
 
 function SideBarUl({ role }: { role: string }) {

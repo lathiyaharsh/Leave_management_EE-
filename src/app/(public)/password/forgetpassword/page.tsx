@@ -20,6 +20,7 @@ import {
   resetPassword,
 } from "@/Components/ui/form/fields";
 import Loading from "@/Components/Loading";
+import Loading2 from "@/Components/Loading2";
 function ForgetPassword() {
   const [loading, setLoading] = useState<boolean>(false);
   const [showEmail, setShowEmail] = useState(true);
@@ -56,6 +57,7 @@ function ForgetPassword() {
         if (method === "verifyOtp") {
           setShowOtp(false);
           setShowPassword(true);
+          localStorage.setItem("jwt", result.data.token);
           toast.success(result.data.message);
         }
         if (method === "resetPassword") {
@@ -177,7 +179,7 @@ function ForgetPassword() {
           )}
 
           {loading ? (
-            <Loading />
+            <Loading2 />
           ) : (
             <>
               {showPassword && (

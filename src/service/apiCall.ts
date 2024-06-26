@@ -19,7 +19,18 @@ export const getApiCall = async (url: string) => {
     return error?.response?.data;
   }
 };
-
+export const deleteApiCall = async (url: string) => {
+  try {
+    const res: any = await apiClient.delete(url);
+    return res;
+  } catch (error: any) {
+    if (error?.response?.status === 401) {
+      await HandleLogout();
+    }
+    console.log(error);
+    return error?.response?.data;
+  }
+};
 export const postApiCallWithImage = async (url: string, data: any) => {
   try {
     const res: any = await apiClient.post(url, data, {
