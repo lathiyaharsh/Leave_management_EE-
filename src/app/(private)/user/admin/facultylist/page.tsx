@@ -1,6 +1,6 @@
 "use client";
 import { getApiCall } from "@/service/apiCall";
-import { getColumns } from "../../manage/userlist/columns";
+import { getColumns } from "./columns";
 import { DataTable } from "@/Components/DataTable/data-table";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
