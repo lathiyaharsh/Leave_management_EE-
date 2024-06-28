@@ -12,7 +12,7 @@ import { getApiCall } from "@/service/apiCall";
 import { toast } from "react-toastify";
 import { LeaveStatus } from "@/Utils/types";
 
-export const getColumns = (setLoading) => [
+export const getColumns = (setLoading:any) => [
   {
     accessorKey: "id",
     header: "Leave Id",

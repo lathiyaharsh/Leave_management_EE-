@@ -83,7 +83,7 @@ export default async function middleware(req: NextRequest) {
 
       const userProtectedRoutes = protectedRoutes[role] || [];
       const allUserProtectedRoutes = [...commonRoutes, ...userProtectedRoutes];
-      console.log(allUserProtectedRoutes);
+      
 
       if (
         !allUserProtectedRoutes.some((route) =>
