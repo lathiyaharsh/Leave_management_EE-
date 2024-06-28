@@ -140,11 +140,11 @@ export function DataTable<T>({
   }, [currentPage, sorting, urlType]);
   return (
     <div className="">
-      <div className=" items-center py-4">
+      <div className=" items-center py-4 flex">
         <Input
           placeholder="Filter Name..."
           onChange={(event) => debouncedFetchData(event.target.value)}
-          className="max-w-sm"
+          className="max-w-sm mb-2"
           value={query}
         />
         <DropdownMenu>

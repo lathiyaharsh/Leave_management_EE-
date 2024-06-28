@@ -59,7 +59,7 @@ const MonthCalendar: React.FC<MonthCalendarProps> = ({
             {leaves.map((leave, index) => (
               <div
                 key={index}
-                className={`leave ${leaveTypes[leave.status as LeaveTypes]}`}
+                className={`leave text-sm ${leaveTypes[leave.status as LeaveTypes]}`}
               >
                 {leave.leaveType}/{leave?.requestedBy?.name}
               </div>

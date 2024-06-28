@@ -14,7 +14,6 @@ export default function DemoPage() {
   const [reloadData, setReloadData] = useState(false);
   const [query, setQuery] = useState("");
   const [getSorting, setGetSorting] = useState("");
-  console.log(reloadData);
   useEffect(() => {
     const fetchLeaveData = async () => {
       setLoading(true);
@@ -33,7 +32,6 @@ export default function DemoPage() {
           setLoading(false);
         }
       } catch (error) {
-        console.error("Error fetching leave data:", error);
         setLoading(false);
       }
     };

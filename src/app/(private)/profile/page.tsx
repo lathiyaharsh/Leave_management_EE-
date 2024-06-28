@@ -60,8 +60,6 @@ function Profile() {
       }
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
   return (
     <>
       {!user ? (
@@ -146,13 +144,19 @@ function Profile() {
                         <i className="mr-2 text-lg text-blueGray-400"></i>
                         {email}
                       </div>
-                      <InfoItem label="Div" value={div} />
-                      <InfoItem label="GrNumber" value={grNumber} />
-                      <InfoItem label="Address" value={address} />
-                      <InfoItem label="Phone No" value={phone} />
-                      <InfoItem label="Gender" value={gender} />
-                      <InfoItem label="Department" value={department} />
-                      <InfoItem label="Role" value={user?.user} />
+                      <div className="text-center">
+                        <table className="mx-auto w-80">
+                          <tbody>
+                            <InfoItem label="Div" value={div} />
+                            <InfoItem label="GrNumber" value={grNumber} />
+                            <InfoItem label="Address" value={address} />
+                            <InfoItem label="Phone No" value={phone} />
+                            <InfoItem label="Gender" value={gender} />
+                            <InfoItem label="Department" value={department} />
+                            <InfoItem label="Role" value={user?.user} />
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                     <div className="mt-10 py-10 border-t border-blueGray-200 text-center"></div>
                   </div>

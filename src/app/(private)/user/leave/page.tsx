@@ -139,19 +139,12 @@ function Leave() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="bg-gray-100 flex items-center justify-center p-3">
-          <div className="bg-white py-40 px-6 flex justify-evenly rounded-lg shadow-lg w-full  gap-8">
-            <div className="flex flex-col items-center justify-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Attendance
-              </h2>
-              <Pie data={pieData} className="max-w-xs" />
-            </div>
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className="bg-gray-100  items-center  p-3">
+         <div className="text-center ">
+              <h2 className="text-4xl mt-10  font-bold text-gray-900 mb-6">
                 Leave Balance
               </h2>
-              <div className="mt-6">
+              <div className="mt-6 flex">
                 <InfoCard title="Total Leave" value={leaveData.totalLeave} />
                 <InfoCard title="Available Leave" value={remainingLeave} />
                 <InfoCard title="Used Leave" value={leaveData.usedLeave} />
@@ -167,15 +160,17 @@ function Leave() {
                   title="Academic Year"
                   value={leaveData.academicYear}
                 />
-                <div className="mt-6 flex justify-center space-x-4">
-                  <button
+                
+              </div>
+              <div className="mb-9 flex justify-center space-x-4">
+                  {/* <button
                     onClick={() => {
                       router.push("/user/leavestatus");
                     }}
                     className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
                   >
                     Leave Status
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => {
                       setViewModel(true);
@@ -185,7 +180,15 @@ function Leave() {
                     Apply Leave
                   </button>
                 </div>
-              </div>
+            </div>
+          <div className="bg-white py-40 px-6 flex justify-evenly rounded-lg shadow-lg w-full  gap-8">
+            
+            
+            <div className="flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Attendance
+              </h2>
+              <Pie data={pieData} className="max-w-xs" />
             </div>
             <div className="flex flex-col items-center justify-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">

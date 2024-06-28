@@ -8,9 +8,13 @@ const InfoCard = ({
   value: string | number;
 }) => {
   return (
-    <div className="mb-4">
-      <p className="text-lg font-medium text-gray-800">{title}</p>
-      <p className="text-gray-600">{value}</p>
+    <div className="max-w-sm mx-auto my-10">
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-6">
+                <h2 className="text-2xl font-bold mb-2">{title}</h2>
+                <p className="text-gray-700 mb-4">{value}</p>
+            </div>
+        </div>
     </div>
   );
 };

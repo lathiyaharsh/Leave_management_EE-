@@ -88,7 +88,7 @@ function TopNavProfile({ user }: { user: { user: User } }) {
           {isUserMenuOpen && (
             <div
               ref={menuRef}
-              className="absolute right-0 top-4 mt-10 w-48 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+              className="absolute right-0 top-4 mt-10 w-48  rounded-lg shadow-lg bg-gray-800"
             >
               <div className="py-1">
                 <A links={{ linkDetails: components }} />

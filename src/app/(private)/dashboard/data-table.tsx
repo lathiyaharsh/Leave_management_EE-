@@ -68,6 +68,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="">
+      <div className="flex items-center">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter User Name..."
@@ -104,6 +105,7 @@ export function DataTable<TData, TValue>({
             })}
         </DropdownMenuContent>
       </DropdownMenu>
+      </div>
       <div className="rounded-md border ">
         <Table className="">
           <TableHeader>
