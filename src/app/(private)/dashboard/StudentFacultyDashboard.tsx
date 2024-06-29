@@ -16,9 +16,9 @@ function StudentFacultyComponent() {
     const fetchLeaveData = async (year: number, month: number) => {
       setLoading(true);
       try {
-        let url = `/leave/userLeaveStatus?year=${year}&month=${month}&limit=1000`;
+        let url = `/leave/userLeaveStatus?year=${year}&month=${month}&limit=200`;
         if (user.user == "faculty" || user.user == "admin") {
-          url = `/leave/?year=${year}&month=${month}&limit=1000`;
+          url = `/leave/?year=${year}&month=${month}&limit=200`;
         }
         const response = await getApiCall(url);
         if (response.data.leaveStatus) {

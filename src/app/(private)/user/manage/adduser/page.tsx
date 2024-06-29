@@ -33,9 +33,6 @@ const SignUp = () => {
       }
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formik;
-
   const fields = addUser;
   let options = {
     role: [{ label: "Student", value: "4" }],

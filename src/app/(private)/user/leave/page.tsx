@@ -141,9 +141,7 @@ function Leave() {
       ) : (
         <div className="bg-gray-100  items-center  p-3">
          <div className="text-center ">
-              <h2 className="text-4xl mt-10  font-bold text-gray-900 mb-6">
-                Leave Balance
-              </h2>
+              
               <div className="mt-6 flex">
                 <InfoCard title="Total Leave" value={leaveData.totalLeave} />
                 <InfoCard title="Available Leave" value={remainingLeave} />

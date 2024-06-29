@@ -71,10 +71,6 @@ export const getColumns = (
     accessorKey: "grNumber",
     header: "grNumber",
   },
-  // {
-  //   accessorKey: "department",
-  //   header: "department",
-  // },
   {
     accessorKey: "div",
     header: "div",

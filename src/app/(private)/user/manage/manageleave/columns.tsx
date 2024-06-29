@@ -21,10 +21,6 @@ export const getColumns = (setLoading:any) => [
     accessorKey: "requestedBy.name",
     header: "Requested By name",
   },
-  // {
-  //   accessorKey: "requestedBy.id",
-  //   header: "Requested By ID",
-  // },
   {
     accessorKey: "startDate",
     header: "Start Date",
@@ -63,10 +59,6 @@ export const getColumns = (setLoading:any) => [
     accessorKey: "userLeave.availableLeave",
     header: "Available Leave",
   },
-  // {
-  //   accessorKey: "requestedTo.email",
-  //   header: "Requested To email",
-  // },
   {
     accessorKey: "requestedTo.name",
     header: "Requested To name",
