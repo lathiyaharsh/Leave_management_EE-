@@ -13,6 +13,7 @@ const publicRoutes = ["/logout"];
 
 export default async function middleware(req: NextRequest) {
   const token = await req.cookies.get("jwt")?.value;
+  console.log(token)
   const nextUrlPath = req.nextUrl.pathname;
 
   if (nextUrlPath.startsWith("/api")) {
