@@ -122,3 +122,10 @@ code {
 .top-nav-spacer{
   margin-bottom: 55px;
 }  
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}

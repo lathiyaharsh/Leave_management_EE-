@@ -33,7 +33,7 @@ const TopNavBar = () => {
                 />
               </button>
               <Link href="/dashboard" className="flex ms-2 md:me-24">
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">
+                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">
                   Lms
                 </span>
               </Link>

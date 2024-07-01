@@ -36,6 +36,14 @@ export const getColumns = (setLoading:any) => [
   {
     accessorKey: "reason",
     header: "Reason",
+    cell: ({ row }: any) => {
+      const reason = row.getValue("reason");
+      return (
+        <div className="truncate" title={reason}>
+          {reason}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "status",

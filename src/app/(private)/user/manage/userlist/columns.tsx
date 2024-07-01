@@ -66,6 +66,14 @@ export const getColumns = (
   {
     accessorKey: "address",
     header: "address",
+    cell: ({ row }: any) => {
+      const address = row.getValue("address");
+      return (
+        <div className="truncate" title={address}>
+          {address}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "grNumber",
